@@ -1008,7 +1008,161 @@
             </div>
  
         </div><!-- /opsec -->
- 
+
+
+        <!-- ═══════════════════════════════════════
+             RAPPORTERINGSPOLICY — SOP
+        ═══════════════════════════════════════ -->
+        <div id="sop" class="report-section mt-8">
+
+            <!-- Header -->
+            <div class="rounded-lg p-6 mb-6" style="background:linear-gradient(135deg,#0f0a14 0%,#0a0a0a 100%);border:1px solid #2a1a3a;border-left:4px solid #9b59b6;">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <p class="font-mono text-[10px] tracking-[.2em] mb-1" style="color:#9b59b6;">SOP #2026-REPORT-NFS &nbsp;·&nbsp; STANDARD OPERATING PROCEDURE</p>
+                        <h2 class="text-white font-mono text-xl md:text-2xl font-bold tracking-tight leading-snug">
+                            Offisiell Rapporteringspolicy
+                        </h2>
+                        <p class="text-osint-muted text-sm mt-1 font-sans">
+                            Nordic FactShield — Standard Operating Procedure for innholdsrapportering
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <svg class="ml-auto mb-1" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="1.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <p class="text-[10px] font-mono tracking-widest" style="color:#9b59b6;">NULLTOLERANSE</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ingress -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <p class="text-osint-text text-sm leading-relaxed opacity-90">
+                    Nordic FactShield opererer med <strong class="text-white">nulltoleranse</strong> for systematisk desinformasjon,
+                    trakassering og ærekrenkelser rettet mot offentlige personer (inkludert medlemmer av Det norske kongehus).
+                    Nedenfor er vår standardiserte protokoll for å rapportere skadelig innhold til plattformer som YouTube.
+                </p>
+            </div>
+
+            <!-- Kategori 1 -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="font-mono text-xs px-2 py-1 rounded" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">KAT. 01</span>
+                    <h3 class="text-white font-mono font-bold text-sm tracking-wide uppercase">
+                        Trakassering og Nettmobbing
+                    </h3>
+                    <span class="font-mono text-[10px] text-osint-muted ml-auto hidden sm:block">Harassment or Cyberbullying</span>
+                </div>
+
+                <p class="text-osint-text text-sm leading-relaxed opacity-80 mb-4">
+                    Når innhold bruker oppdiktede og nedverdigende påstander for å angripe en persons verdighet:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Trakassering og nettmobbing</div>
+                        <div class="stat-lbl">Hovedkategori (plattform)</div>
+                    </div>
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Målrettet ondsinnet angrep</div>
+                        <div class="stat-lbl">Underkategori / Mobbing av enkeltperson</div>
+                    </div>
+                </div>
+
+                <!-- Rapporteringstekst EN -->
+                <div class="rounded-lg p-4 mb-3" style="background:#080a0f;border:1px solid #2a1a3a;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-mono text-[10px] tracking-widest" style="color:#9b59b6;">🇬🇧 STANDARDISERT RAPPORTERINGSTEKST (ENGELSK)</span>
+                        <button onclick="copyText('cat1-en')" class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded transition-all" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;" onmouseover="this.style.background='#2a1a3a'" onmouseout="this.style.background='#1a0f2a'">
+                            KOPIER
+                        </button>
+                    </div>
+                    <p id="cat1-en" class="text-osint-text text-sm leading-relaxed opacity-90 italic">
+                        "This video systematically targets a public figure (Princess Mette-Marit) with unverified, degrading, and sexually defamatory rumors (claiming she was an 'escort' and has 'secret drug tapes'). It violates YouTube's harassment policies by using malicious slander to humiliate a woman for clickbait revenue."
+                    </p>
+                </div>
+
+                <!-- Norsk begrunnelse -->
+                <div class="rounded-lg p-4" style="background:#050508;border:1px solid #1a1a2a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-2 text-osint-muted">🇳🇴 NORSK OVERSETTELSE / BEGRUNNELSE</p>
+                    <p class="text-osint-muted text-sm leading-relaxed italic">
+                        Denne videoen retter seg systematisk mot en offentlig person med ubekreftede, nedverdigende og seksuelt ærekrenkende rykter. Den bryter med plattformens retningslinjer mot trakassering ved å bruke ondsinnet bakvaskelse for å ydmyke en kvinne for klikkbaserte annonseinntekter.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kategori 2 -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="font-mono text-xs px-2 py-1 rounded" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">KAT. 02</span>
+                    <h3 class="text-white font-mono font-bold text-sm tracking-wide uppercase">
+                        Søppelpost og Villedende Innhold
+                    </h3>
+                    <span class="font-mono text-[10px] text-osint-muted ml-auto hidden sm:block">Spam or Misleading</span>
+                </div>
+
+                <p class="text-osint-text text-sm leading-relaxed opacity-80 mb-4">
+                    Når innholdsskapere monetariserer (tjener penger på) falske nyheter og avviste konspirasjonsteorier:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Søppelpost eller villedende innhold</div>
+                        <div class="stat-lbl">Hovedkategori (plattform)</div>
+                    </div>
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Villedende tekst / Clickbait</div>
+                        <div class="stat-lbl">Underkategori</div>
+                    </div>
+                </div>
+
+                <!-- Rapporteringstekst EN -->
+                <div class="rounded-lg p-4 mb-3" style="background:#080a0f;border:1px solid #2a1a3a;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-mono text-[10px] tracking-widest" style="color:#9b59b6;">🇬🇧 STANDARDISERT RAPPORTERINGSTEKST (ENGELSK)</span>
+                        <button onclick="copyText('cat2-en')" class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded transition-all" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;" onmouseover="this.style.background='#2a1a3a'" onmouseout="this.style.background='#1a0f2a'">
+                            KOPIER
+                        </button>
+                    </div>
+                    <p id="cat2-en" class="text-osint-text text-sm leading-relaxed opacity-90 italic">
+                        "The creator is monetizing pure disinformation. They are presenting debunked conspiracy theories as facts to manipulate the audience and generate ad revenue."
+                    </p>
+                </div>
+
+                <!-- Norsk begrunnelse -->
+                <div class="rounded-lg p-4" style="background:#050508;border:1px solid #1a1a2a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-2 text-osint-muted">🇳🇴 NORSK OVERSETTELSE / BEGRUNNELSE</p>
+                    <p class="text-osint-muted text-sm leading-relaxed italic">
+                        Skaperen tjener penger på ren desinformasjon. De presenterer tilbakeviste konspirasjonsteorier som fakta for å manipulere publikum og generere annonseinntekter.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Vår holdning -->
+            <div class="rounded-lg p-6 mb-6" style="background:linear-gradient(135deg,#0f0a14 0%,#0a0a0a 100%);border:1px solid #2a1a3a;">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-2" style="color:#9b59b6;">VÅR HOLDNING — NORDIC FACTSHIELD</p>
+                <p class="text-white text-sm leading-relaxed font-semibold">
+                    Plattformer må holdes ansvarlige. Nordic FactShield vil systematisk overvåke og rapportere
+                    ethvert forsøk på å bruke «ytringsfrihet» som et skalkeskjul for ærekrenkelser og
+                    profittdrevet desinformasjon.
+                </p>
+            </div>
+
+            <!-- Footer stamp -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 mb-2">
+                <p class="text-[10px] font-mono text-osint-muted tracking-widest">
+                    Nordic FactShield.norway &nbsp;·&nbsp; SOP #2026-REPORT-NFS &nbsp;·&nbsp; RAPPORTERINGSPOLICY
+                </p>
+                <p class="text-[10px] font-mono text-osint-muted">
+                    PLATTFORMER: YouTube · Meta · X (Twitter) · TikTok
+                </p>
+            </div>
+
+        </div><!-- /sop -->
+
     </main>
  
     <!-- ═══════════════════════════════════════
@@ -1020,6 +1174,15 @@
     </footer>
  
     <script>
+        // Copy to clipboard
+        function copyText(id) {
+            const el = document.getElementById(id);
+            navigator.clipboard.writeText(el.innerText).then(() => {
+                const btns = document.querySelectorAll('button[onclick="copyText(\'' + id + '\')"]');
+                btns.forEach(b => { b.innerText = 'KOPIERT ✓'; setTimeout(() => b.innerText = 'KOPIER', 2000); });
+            });
+        }
+
         function toggleAcc(id) {
             const body = document.getElementById(id);
             const icon = document.getElementById(id + '-icon');
@@ -1059,4 +1222,3 @@
  
 </body>
 </html>
- 
