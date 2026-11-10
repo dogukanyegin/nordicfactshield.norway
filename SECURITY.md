@@ -1,21 +1,5 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+The current source release is maintained. Report vulnerabilities privately using GitHub private vulnerability reporting if enabled by the repository owner. Do not publish credentials or exploit private data. No response SLA is configured.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
-## Reporting a Vulnerability
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+See KURULUM-VE-KORUMA.md for deployment requirements and boundaries. The browser client is public and read-only by design; actual permissions must be enforced by Supabase grants and RLS, not by the user interface. No claim of complete protection is made.

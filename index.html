@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://onnsaeorzwzgusdamqdi.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="onKi8iYo-HwHMY-jHCkS4hGTJ9ogij7eYGl4ikFCgTE" />
@@ -51,37 +53,15 @@
     </script>
 
     <!-- Tailwind CDN (mevcut tasarım için OK) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Source+Sans+Pro:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    
+    
+    
 
     <!-- Tailwind theme config -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "osint-dark": "#121212",
-              "osint-card": "#1E1E1E",
-              "osint-green": "#00BFA5",
-              "osint-danger": "#CF6679",
-              "osint-text": "#E0E0E0",
-              "osint-muted": "#888888",
-            },
-            fontFamily: {
-              mono: ['"Roboto Mono"', "monospace"],
-              sans: ['"Source Sans Pro"', "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    
 
     <style>
       body {
@@ -102,7 +82,8 @@
         background: #00bfa5;
       }
     </style>
-  </head>
+  <link rel="stylesheet" href="./theme.css">
+</head>
 
   <body class="bg-osint-dark text-osint-text">
     <div id="root"></div>

@@ -11,7 +11,7 @@ import { ChevronLeft, Paperclip, ShieldCheck, Database } from "lucide-react";
 const SUPABASE_URL = "https://onnsaeorzwzgusdamqdi.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9ubnNhZW9yend6Z3VzZGFtcWRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwOTA1MzcsImV4cCI6MjA4NjY2NjUzN30.Z89JNhn0c1X0FgPP5w45UxzQ3_rg2XSdApyPLI1x1BQ";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } });
 const TABLE = "factshield";
 
 /**
@@ -31,6 +31,7 @@ interface Post {
 function toDateYMD(value: string | null): string {
   if (!value) return "";
   const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "";
   return d.toISOString().slice(0, 10);
 }
 
@@ -74,6 +75,7 @@ const App = () => {
   const [view, setView] = useState<"home" | "post">("home");
   const [activePostId, setActivePostId] = useState<number | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loadError, setLoadError] = useState(false);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
   const activePost = useMemo(
@@ -83,12 +85,14 @@ const App = () => {
 
   const loadPosts = async () => {
     setLoadingPosts(true);
+    setLoadError(false);
     try {
       const { data, error } = await supabase
         .from(TABLE)
         .select("id,title,author,content,date,files")
         .order("id", { ascending: false });
 
+      if (error) throw error;
       if (data) {
         const mapped: Post[] = data.map((row: any) => ({
           id: Number(row.id),
@@ -100,6 +104,8 @@ const App = () => {
         }));
         setPosts(mapped);
       }
+    } catch {
+      setLoadError(true);
     } finally {
       setLoadingPosts(false);
     }
@@ -127,14 +133,14 @@ const App = () => {
         <Database size={18} className="text-osint-green" />
         <h2 className="text-lg font-mono text-white uppercase tracking-widest">Global Intelligence Archive</h2>
       </div>
-      {loadingPosts ? (
+      {loadError ? (<div role="alert" className="p-8 border border-osint-border rounded-lg"><p>Unable to load the archive. Please try again.</p><button className="text-osint-green mt-4" onClick={loadPosts}>RETRY</button></div>) : loadingPosts ? (
         <div className="p-8 text-center text-osint-muted font-mono animate-pulse">Synchronizing records...</div>
       ) : posts.length === 0 ? (
         <div className="p-8 text-center text-osint-muted font-mono">Archive is currently empty.</div>
       ) : (
         posts.map((post) => (
           <article key={post.id} className="bg-osint-card border border-[#333] rounded-lg p-6 shadow-lg hover:border-osint-green transition-all">
-            <h2 className="text-2xl font-mono text-white mb-2 cursor-pointer hover:text-osint-green"
+            <h2 tabIndex={0} role="button" onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActivePostId(post.id); setView("post"); } }} className="text-2xl font-mono text-white mb-2 cursor-pointer hover:text-osint-green"
               onClick={() => { setActivePostId(post.id); setView("post"); }}>
               {post.title}
             </h2>
@@ -188,6 +194,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0a] font-sans selection:bg-osint-green selection:text-black">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="border-b border-[#333] py-10 text-center bg-[#111]">
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-mono text-white mb-2 tracking-tighter cursor-pointer" onClick={() => setView("home")}>
@@ -207,14 +214,14 @@ Being mentioned in investigative documents does not equate to criminal involveme
             </button>
 
             {/* ✅ YENI: Integrity Arşivine Geçiş Linki */}
-            <a href="/uskyld-analyse.html" className="text-[#d4af37] hover:text-white transition-all pb-1 border-b border-transparent hover:border-white">
+            <a href="./uskyld-analyse.html" className="text-[#d4af37] hover:text-white transition-all pb-1 border-b border-transparent hover:border-white">
               USKYLD ANALYSE
             </a>
           </nav>
         </div>
       </header>
 
-      <main className="flex-grow container max-w-4xl mx-auto px-6 py-12">
+      <main id="main-content" className="flex-grow container max-w-4xl mx-auto px-6 py-12">
         {view === "home" && renderHome()}
         {view === "post" && renderPostDetail()}
       </main>

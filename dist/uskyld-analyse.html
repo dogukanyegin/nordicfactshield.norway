@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://onnsaeorzwzgusdamqdi.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uskyld Analyse | Integrity Declaration – Nordic FactShield</title>
+    <meta name="description" content="Uskyldsanalyse basert på offentlige DOJ-dokumenter og OSINT-metodikk. Nordic FactShield skiller verifiserte fakta fra spekulasjon for Norge, Sverige, Danmark og Europa.">
+    <meta name="keywords" content="uskyldsanalyse, integrity declaration, DOJ dokumentanalyse, OSINT Norge, OSINT Sverige, OSINT Danmark, mahkeme belgesi analizi, açık kaynak istihbarat, kildekritikk, unsealed court records">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nordicfactshieldnorway.se/uskyld-analyse.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Nordic FactShield">
+    <meta property="og:title" content="Uskyld Analyse | Integrity Declaration">
+    <meta property="og:description" content="Uskyldsanalyse basert på offentlige DOJ-dokumenter og OSINT-metodikk.">
+    <meta property="og:locale" content="nb_NO">
+    
+    
+    
+    
+    
+
+    
+
+    <style>
+        body { background-color:#0a0a0a; color:#e0e0e0; }
+
+        ::-webkit-scrollbar { width:8px; }
+        ::-webkit-scrollbar-track { background:#0a0a0a; }
+        ::-webkit-scrollbar-thumb { background:#333; border-radius:4px; }
+        ::-webkit-scrollbar-thumb:hover { background:#00BFA5; }
+
+        .fade-in { animation: fadeIn .8s ease-in; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+        /* ── Report section ── */
+        .report-section { scroll-margin-top: 80px; }
+
+        .report-header {
+            background: linear-gradient(135deg, #111 0%, #0f1a18 100%);
+            border: 1px solid #1e3a35;
+            border-left: 4px solid #00BFA5;
+        }
+
+        .report-block {
+            background: #0e0e0e;
+            border: 1px solid #222;
+            transition: border-color .25s;
+        }
+        .report-block:hover { border-color: #333; }
+
+        .report-number {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 10px;
+            color: #00BFA5;
+            letter-spacing: .2em;
+        }
+
+        .stat-box {
+            background: #0a0a0a;
+            border: 1px solid #1e3a35;
+            border-radius: 6px;
+            padding: 12px 16px;
+        }
+        .stat-val { font-family:'Roboto Mono',monospace; color:#00BFA5; font-size:13px; font-weight:700; }
+        .stat-lbl { font-size:11px; color:#666; margin-top:2px; }
+
+        .toc-link {
+            font-family:'Roboto Mono',monospace;
+            font-size:11px;
+            color:#666;
+            letter-spacing:.1em;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:6px 0;
+            border-bottom:1px solid #1a1a1a;
+            transition: color .2s;
+        }
+        .toc-link:hover { color:#00BFA5; }
+        .toc-link::before { content:'→'; color:#00BFA5; }
+
+        .report-divider {
+            border:none;
+            border-top:1px solid #1a1a1a;
+            margin: 24px 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg,#0d1f1c 0%,#0a0a0a 100%);
+            border: 1px solid #1e3a35;
+            border-radius:6px;
+            padding:16px 20px;
+        }
+
+        /* Accordion toggle */
+        .acc-toggle { cursor:pointer; user-select:none; }
+        .acc-body { overflow:hidden; transition: max-height .4s ease, opacity .3s ease; }
+        .acc-body.collapsed { max-height:0 !important; opacity:0; }
+        .acc-body.expanded  { opacity:1; }
+        .acc-icon { transition:transform .3s; }
+        .acc-icon.open { transform:rotate(90deg); }
+    </style>
+<link rel="stylesheet" href="./theme.css">
+</head>
+<body class="font-sans min-h-screen flex flex-col selection:bg-osint-green selection:text-black">
+
+    <!-- ═══════════════════════════════════════
+         HEADER
+    ═══════════════════════════════════════ -->
+    <header class="border-b border-osint-border py-10 text-center bg-[#111]">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-mono text-white mb-2 tracking-tighter cursor-pointer"
+                data-click="window.location.href='/'">
+                NordicFact<span class="text-osint-green">Shield.Norway</span>.no
+            </h1>
+            <p class="text-osint-muted text-lg font-light tracking-wide">Nordic FactShield is an independent, non-partisan OSINT and digital investigation initiative. We are not affiliated with any government, intelligence agency, political organization, or media institution. Our work is based on open-source intelligence, data analysis, and transparent methodologies.We analyze high-profile cases, including the Epstein network, using verifiable data and open-source intelligence. Being mentioned in investigative documents does not equate to criminal involvement. Our work focuses on separating verified facts from speculation, misinformation, and narrative distortion.</p>
+
+            <nav class="mt-8 flex justify-center space-x-10 text-xs font-mono tracking-[0.2em]">
+                <a href="./" class="text-osint-muted hover:text-white transition-all pb-1 border-b border-transparent hover:border-white no-underline">
+                    HOME
+                </a>
+                <span class="text-osint-gold border-b border-osint-gold pb-1 cursor-default">
+                    USKYLD ANALYSE
+                </span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════
+         MAIN
+    ═══════════════════════════════════════ -->
+    <main id="main-content" class="flex-grow container max-w-4xl mx-auto px-6 py-12 fade-in">
+
+        <!-- ── Integrity Declaration Card ── -->
+        <div class="bg-osint-card border border-osint-gold rounded-lg p-8 md:p-12 shadow-2xl relative overflow-hidden mb-12">
+
+            <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"
+                     stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <path d="M9 12l2 2 4-4"></path>
+                </svg>
+            </div>
+
+            <div class="text-center mb-10 border-b border-osint-border pb-8">
+                <svg class="mx-auto text-osint-gold mb-4" width="48" height="48" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h1 class="text-2xl md:text-3xl font-mono text-white tracking-widest uppercase mb-2">
+                    Integrity Declaration
+                </h1>
+                <p class="text-[10px] text-osint-muted font-mono tracking-[0.3em] uppercase">
+                    Official Research Statement #2026-USKYLD
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 font-sans">
+
+                <!-- English -->
+                <section class="space-y-4">
+                    <h2 class="text-osint-gold font-mono text-xs tracking-widest uppercase flex items-center">
+                        <span class="w-2 h-2 bg-osint-gold mr-2 rounded-full"></span> English Version
+                    </h2>
+                    <h3 class="text-white font-bold text-lg uppercase leading-tight">
+                        Subject: Analytical Defense of Institutional Integrity
+                    </h3>
+                    <p class="text-osint-text leading-relaxed text-base opacity-90 border-l-2 border-osint-border pl-4">
+                        The documents presented on this platform are curated from publicly available archives
+                        (specifically DOJ/US Judicial records). My objective is not the dissemination of sensitive
+                        information, but rather the <strong class="text-white">Fact-Based Analysis</strong> of
+                        historical data to counteract misinformation.
+                    </p>
+                    <p class="text-osint-muted text-sm leading-relaxed">
+                        As a licensed independent analyst, I provide this context to prove the moral boundaries
+                        maintained by the Norwegian Crown. This study serves as a digital archive for security
+                        protocols and as a testament to the innocence (Uskyld) of HKH Crown Princess Mette-Marit.
+                    </p>
+                </section>
+
+                <!-- Norsk -->
+                <section class="space-y-4 md:border-l md:border-osint-border md:pl-8">
+                    <h2 class="text-osint-gold font-mono text-xs tracking-widest uppercase flex items-center">
+                        <span class="w-2 h-2 bg-osint-gold mr-2 rounded-full"></span> Norsk Versjon
+                    </h2>
+                    <h3 class="text-white font-bold text-lg uppercase leading-tight">
+                        Emne: Analytisk forsvar av institusjonell integritet
+                    </h3>
+                    <p class="text-osint-text leading-relaxed text-base opacity-90 border-l-2 border-osint-border pl-4">
+                        Dokumentene som presenteres på denne plattformen er hentet fra offentlig tilgjengelige arkiver
+                        (spesifikt DOJ/US judisielle registre). Mitt mål er ikke spredning av sensitiv informasjon,
+                        men snarere en <strong class="text-white">faktabasert analyse</strong> av historiske data
+                        for å motvirke feilinformasjon.
+                    </p>
+                    <p class="text-osint-muted text-sm leading-relaxed">
+                        Som en uavhengig analytiker gir jeg denne konteksten for å bevise de moralske grensene som
+                        ble opprettholdt av det norske kongehuset. Denne studien fungerer som et digitalt arkiv for
+                        sikkerhetsprotokoll og som et vitnesbyrd om uskyldigheten (Uskyld) til HKH Kronprinsesse
+                        Mette-Marit.
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════
+             NORSK RAPPORT — embedded
+        ═══════════════════════════════════════ -->
+        <div id="rapport" class="report-section">
+
+            <!-- Report header banner -->
+            <div class="report-header rounded-lg p-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <p class="report-number mb-1">RAPPORT #2026-BUDSJETT-NO &nbsp;·&nbsp; ÅPEN KILDE</p>
+                        <h2 class="text-white font-mono text-xl md:text-2xl font-bold tracking-tight leading-snug">
+                            Monarki eller republikk –<br>hva er billigst?
+                        </h2>
+                        <p class="text-osint-muted text-sm mt-1 font-sans">
+                            En budsjettanalyse basert på Norge, Sverige, Danmark og store republikker
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00BFA5"
+                             stroke-width="1.5" class="ml-auto mb-1">
+                            <path d="M3 3h18v18H3z" rx="2"/>
+                            <path d="M3 9h18M9 21V9"/>
+                        </svg>
+                        <p class="text-[10px] font-mono text-osint-muted tracking-widest">BUDSJETT&nbsp;2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOC -->
+            <div class="report-block rounded-lg p-6 mb-6">
+                <p class="report-number mb-3">INNHOLDSFORTEGNELSE</p>
+                <nav>
+                    <a href="#s-hovedtese"  class="toc-link">Hovedtese</a>
+                    <a href="#s-skandinav"  class="toc-link">1) Skandinaviske monarkiers budsjetter</a>
+                    <a href="#s-republiker" class="toc-link">2) Store republikker som sammenligningsgrunnlag</a>
+                    <a href="#s-tolkning"   class="toc-link">3) Monarkivennlig fortolkning</a>
+                    <a href="#s-scenario"   class="toc-link">4) Hva hvis Norge var en republikk?</a>
+                    <a href="#s-konklusjon" class="toc-link">5) Konklusjon</a>
+                </nav>
+            </div>
+
+            <!-- ── Hovedtese ── -->
+            <div id="s-hovedtese" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="report-number mb-2">INNLEDNING</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">Hovedtese</h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90">
+                    Sett fra et monarkivennlig perspektiv er kjerneargumentet følgende: moderne konstitusjonelle
+                    monarkier, særlig innenfor den skandinaviske modellen, ivaretar det symbolske statssjefembetet
+                    til en relativt lav og forutsigbar kostnad. I republikker kommer derimot statssjefembetet
+                    ofte med en større institusjonell struktur, tyngre politisk sikkerhetsbelastning, høyere
+                    overgangskostnader og et mer utstrakt byråkratisk apparat.
+                </p>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mt-3">
+                    Påstanden om at «monarki er dyrt og republikk er billig» er derfor ikke universelt gyldig –
+                    tvert imot kan monarkiet i visse land tilby en mer stabil og mer kostnadseffektiv modell.
+                    Dette gjelder særlig for smale, konstitusjonelle og seremonielle monarkier som
+                    <strong class="text-white">Norge, Sverige og Danmark</strong>.
+                </p>
+            </div>
+
+            <!-- ── 1) Skandinav ── -->
+            <div id="s-skandinav" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="report-number mb-2">SEKSJON 01</p>
+                <h3 class="text-white font-mono font-bold text-base mb-5 tracking-wide">
+                    Skandinaviske monarkiers gjeldende hoff-/kongefamiliebudsjetter
+                </h3>
+
+                <!-- Norge -->
+                <div class="acc-toggle flex items-center justify-between mb-3 group" data-click="toggleAcc('norge')">
+                    <span class="text-osint-green text-sm font-mono font-bold group-hover:underline">🇳🇴 Norge (2026, saldert budsjett)</span>
+                    <span class="acc-icon text-osint-muted font-mono text-xs" id="norge-icon">▶</span>
+                </div>
+                <div class="acc-body expanded mb-4" id="norge" style="max-height:600px">
+                    <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                        I Norge viser det salderte budsjettet for 2026 et samlet beløp på
+                        <strong class="text-white">307 710 000 NOK</strong> for «Det kongelige hus».
+                        Dette inkluderer apanasje til kongen og dronningen, Kongehuset / hoffinstitusjonens
+                        driftsutgifter samt separat apanasje til kronprinsparet.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="stat-box">
+                            <div class="stat-val">16 234 000 NOK</div>
+                            <div class="stat-lbl">Apanasje – Kongen og Dronningen</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-val">277 963 000 NOK</div>
+                            <div class="stat-lbl">Kongehuset / hoffinstitusjon</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-val">13 513 000 NOK</div>
+                            <div class="stat-lbl">Apanasje – Kronprinsparet</div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="report-divider">
+
+                <!-- Sverige -->
+                <div class="acc-toggle flex items-center justify-between mb-3 group" data-click="toggleAcc('sverige')">
+                    <span class="text-osint-green text-sm font-mono font-bold group-hover:underline">🇸🇪 Sverige (2026)</span>
+                    <span class="acc-icon text-osint-muted font-mono text-xs" id="sverige-icon">▶</span>
+                </div>
+                <div class="acc-body collapsed mb-4" id="sverige" style="max-height:0">
+                    <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                        I den svenske regjeringens budsjettdokument for 2026 er det foreslåtte beløpet for
+                        «Kungliga hov- och slottsstaten» oppgitt til:
+                    </p>
+                    <div class="stat-box inline-block">
+                        <div class="stat-val">190 457 000 SEK</div>
+                        <div class="stat-lbl">Kungliga hov- och slottsstaten (2026)</div>
+                    </div>
+                </div>
+                <hr class="report-divider">
+
+                <!-- Danmark -->
+                <div class="acc-toggle flex items-center justify-between mb-3 group" data-click="toggleAcc('danmark')">
+                    <span class="text-osint-green text-sm font-mono font-bold group-hover:underline">🇩🇰 Danmark (forslag til finanslov 2026)</span>
+                    <span class="acc-icon text-osint-muted font-mono text-xs" id="danmark-icon">▶</span>
+                </div>
+                <div class="acc-body collapsed mb-4" id="danmark" style="max-height:0">
+                    <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                        I det danske Finansministeriets forslag til finanslov for 2026 er følgende beløp avsatt:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="stat-box">
+                            <div class="stat-val">134,6 mill. DKK</div>
+                            <div class="stat-lbl">Kongen</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-val">19,4 mill. DKK</div>
+                            <div class="stat-lbl">Øvrige kongefamiliemedlemmer</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-val">154,0 mill. DKK</div>
+                            <div class="stat-lbl">Samlet synlig ramme</div>
+                        </div>
+                    </div>
+                    <p class="text-osint-muted text-xs mt-3 italic">
+                        * Forslag fra Finansministeriet – ikke endelig vedtatt budsjett.
+                    </p>
+                </div>
+
+                <div class="highlight-box mt-2">
+                    <p class="text-osint-green text-xs font-mono mb-1 tracking-widest">ANALYTISK NOTAT</p>
+                    <p class="text-osint-text text-sm leading-relaxed opacity-80">
+                        Disse tre eksemplene viser at kostnaden ved statssjefembetet i de skandinaviske monarkiene
+                        ikke er «ukontrollerte palasskostnader», men faste, transparente og forutsigbare
+                        offentlige utgifter. Særlig i Norge og Sverige er postene tydelig synliggjort i budsjettet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── 2) Republiker ── -->
+            <div id="s-republiker" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="report-number mb-2">SEKSJON 02</p>
+                <h3 class="text-white font-mono font-bold text-base mb-3 tracking-wide">
+                    Store republikker som sammenligningsgrunnlag
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-80 mb-5">
+                    Eksemplene nedenfor er valgt fra de viktigste republikkene med åpne budsjetter for å
+                    muliggjøre en sammenligning av palasset / statsledelsens kjernestruktur. Omfanget varierer
+                    fra land til land – tallene er ikke direkte sammenlignbare, men gir likevel en retningsgivende
+                    pekepinn.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇺🇸 USA — HVITE HUS (2026)</div>
+                        <div class="stat-val">16,1 mill. USD</div>
+                        <div class="stat-lbl">Executive Residence (kun bolig, ekskl. Secret Service)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇫🇷 FRANKRIKE — ÉLYSÉE (2025)</div>
+                        <div class="stat-val">125 662 386 EUR</div>
+                        <div class="stat-lbl">Présidence de la République – total driftsbudsjett</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇩🇪 TYSKLAND (2026)</div>
+                        <div class="stat-val">67,388 mill. EUR</div>
+                        <div class="stat-lbl">Bundespräsident und Bundespräsidialamt</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇮🇹 ITALIA — QUIRINALE (2025)</div>
+                        <div class="stat-val">230 mill. EUR</div>
+                        <div class="stat-lbl">Statsbevilgning til presidentembetet (inkl. infrastruktur)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇫🇮 FINLAND (2026)</div>
+                        <div class="stat-val">12,275 mill. EUR</div>
+                        <div class="stat-lbl">Kansli 9,775M + seyahat 1,95M + eski başkanlar 0,55M</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇮🇸 ISLAND (2026)</div>
+                        <div class="stat-val">418,7 mill. ISK</div>
+                        <div class="stat-lbl">Embætti forseta Íslands</div>
+                    </div>
+                </div>
+
+                <!-- Tyrkia – separat, med eget notat -->
+                <div class="stat-box mb-2">
+                    <div class="text-[10px] font-mono text-osint-muted tracking-widest mb-1">🇹🇷 TYRKIA (2026)</div>
+                    <div class="stat-val">16 495 534 000 TRY</div>
+                    <div class="stat-lbl">Cumhurbaşkanlığı – smal institusjonslinje (bredere ramme: 21,29 mrd. TRY)</div>
+                </div>
+            </div>
+
+            <!-- ── 3) Tolkning ── -->
+            <div id="s-tolkning" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="report-number mb-2">SEKSJON 03</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Monarkivennlig fortolkning: Hvorfor den skandinaviske modellen fremstår som robust
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Det budsjettvennlige kjerneargumentet for monarkiet er følgende: de skandinaviske monarkiene
+                    er statsoverhoder uten presidentvalg og presidentskifte, med lavt politisk spenningsnivå,
+                    som fungerer seremonielt og kontinuerlig. Denne strukturen begrenser utgifter knyttet til:
+                </p>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-start gap-2 text-sm text-osint-text opacity-80">
+                        <span class="text-osint-green font-mono mt-0.5">▸</span>
+                        Sikkerhetsbehov i valgperioder
+                    </li>
+                    <li class="flex items-start gap-2 text-sm text-osint-text opacity-80">
+                        <span class="text-osint-green font-mono mt-0.5">▸</span>
+                        Kostnadene ved embetsskifte og oppbygging av nye staber
+                    </li>
+                    <li class="flex items-start gap-2 text-sm text-osint-text opacity-80">
+                        <span class="text-osint-green font-mono mt-0.5">▸</span>
+                        Politiserte beskyttelsesbyrder og institusjonell konkurranse
+                    </li>
+                </ul>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90">
+                    Ser man derimot på republikkeksemplene er budsjettene betydelige selv i land med symbolsk
+                    statssjef – Tyskland, Frankrike og Italia er klare eksempler. Påstanden om at «fjerning av
+                    kongedømmet vil gi store besparelser» lar seg dermed ikke automatisk verifisere med tall,
+                    i hvert fall ikke for europeiske statstyper.
+                </p>
+            </div>
+
+            <!-- ── 4) Scenario ── -->
+            <div id="s-scenario" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="report-number mb-2">SEKSJON 04</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Hva ville kostnaden bli om Norge var en republikk?
+                </h3>
+                <p class="text-osint-muted text-xs font-mono mb-4 italic">
+                    ⚠ Analytisk estimat – Norge er ikke en republikk. Tallene er avledet fra Finland, Island og Tysklands åpne data.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div class="highlight-box">
+                        <p class="text-osint-green text-xs font-mono mb-1 tracking-widest">NÅVÆRENDE KOSTNAD (2026)</p>
+                        <p class="text-white font-mono text-lg font-bold">307 710 000 NOK</p>
+                        <p class="text-osint-muted text-xs mt-1">Totalt kongebudsjett</p>
+                    </div>
+                    <div class="highlight-box" style="border-color:#3a2a1e">
+                        <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">ESTIMERT REPUBLIKKSCENARIO</p>
+                        <p class="text-white font-mono text-lg font-bold">320 – 450 mill. NOK</p>
+                        <p class="text-osint-muted text-xs mt-1">Stabilisert årlig kostnad (+ engangsutgifter)</p>
+                    </div>
+                </div>
+
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Selv uten kongehuset ville Norge fortsatt ha behov for et statsoverhode, et offisielt
+                    residens, offisielle mottagelser og seremonier, utenlandsbesøk, en personalstab,
+                    en arkiv- og protokollstruktur, sikkerhet og vedlikeholdsutgifter.
+                </p>
+                <div class="highlight-box">
+                    <p class="text-osint-green text-xs font-mono mb-1 tracking-widest">KONKLUSJON – SEKSJON 04</p>
+                    <p class="text-osint-text text-sm leading-relaxed opacity-80">
+                        Den primære gevinsten ved å innføre republikk i Norge ville ikke være en stor innsparing
+                        på budsjettet, men utelukkende et konstitusjonelt og prinsippmessig regimeskifte.
+                        I overgångsperioden vil det dessuten påløpe engangsutgifter til ny institusjonell design,
+                        symbolendringer, protokollomstrukturering og sikkerhetsomlegging.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── 5) Konklusjon ── -->
+            <div id="s-konklusjon" class="report-block rounded-lg p-6 mb-6 report-section">
+                <p class="report-number mb-2">SEKSJON 05</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">Konklusjon</h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Sett i lys av de skandinaviske konstitusjonelle monarkiene er kongehusene ikke
+                    «sløsemaskiner» – de er i de fleste tilfeller faste offentlige institusjoner med kjente
+                    utgifter, fri for politisk skiftestress og med en diplomatisk representasjonsfunksjon.
+                    Dataene fra Norge, Sverige og Danmark underbygger dette.
+                </p>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                    Statssjefembetet i republikker er heller ikke alltid billigere. Bare «Executive Residence» i
+                    Det hvite hus i USA er en post på mange millioner dollar; eksemplene fra Frankrike, Tyskland,
+                    Italia, Finland, Island og Tyrkia viser at statssjefsinstitusjonene i republikker har budsjetter
+                    som ikke bør undervurderes.
+                </p>
+                <div class="highlight-box border-osint-gold" style="border-color:#D4AF37">
+                    <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">DET STERKESTE MONARKIVENNLIGE ARGUMENTET</p>
+                    <p class="text-white text-sm leading-relaxed font-semibold">
+                        Det eksisterende systemet opererer allerede til en relativt begrenset kostnad;
+                        en overgang til republikk ville være en ideologisk endring – ikke en økonomisk revolusjon.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer stamp -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2">
+                <p class="text-[10px] font-mono text-osint-muted tracking-widest">
+                  nordicfactshield.norway &nbsp;·&nbsp; RAPPORT #2026-BUDSJETT-NO &nbsp;·&nbsp; ÅPEN KILDE
+                </p>
+                <p class="text-[10px] font-mono text-osint-muted">
+                    DATA: Statsbudsjettet (NO) · Regeringen.se · Finansministeriet (DK) · OMB (US) · Bundeshaushalt (DE)
+                </p>
+            </div>
+
+        </div><!-- /rapport -->
+
+
+        <!-- ═══════════════════════════════════════
+             ANALYSE #2 — Mette-Marit forsvar
+        ═══════════════════════════════════════ -->
+        <div id="analyse2" class="report-section mt-8">
+
+            <!-- Header banner -->
+            <div class="report-header rounded-lg p-6 mb-6" style="border-left-color:#D4AF37; background: linear-gradient(135deg,#15110a 0%,#0a0a0a 100%); border-color:#2a2010;">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-1">ANALYSE #2026-USKYLD-MM &nbsp;·&nbsp; FORSVARSRAPPORT</p>
+                        <h2 class="text-white font-mono text-xl md:text-2xl font-bold tracking-tight leading-snug">
+                            Nordens Samvittighet:<br>
+                            <span class="text-osint-gold">HKH Kronprinsesse Mette-Marit</span>
+                        </h2>
+                        <p class="text-osint-muted text-sm mt-1 font-sans">
+                            En forsvarsanalyse av institusjonell integritet og det norske monarkiets fremtid
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <svg class="ml-auto mb-1" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                        <p class="text-[10px] font-mono text-osint-gold tracking-widest">USKYLD&nbsp;2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TOC #2 -->
+            <div class="report-block rounded-lg p-6 mb-6">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-3">INNHOLDSFORTEGNELSE</p>
+                <nav>
+                    <a href="#m-innledning"  class="toc-link" style="color:#666">Innledning: Institusjonen midt i stormen</a>
+                    <a href="#m-epstein"     class="toc-link" style="color:#666">1) Epstein-dossieret: dårlig skjønn eller uskyldig feiltakelse?</a>
+                    <a href="#m-marius"      class="toc-link" style="color:#666">2) Marius Borg Høiby-krisen: morskjærlighet og individuelt ansvar</a>
+                    <a href="#m-folkets"     class="toc-link" style="color:#666">3) Folkets prinsesse: tjeneste, litteratur og humanitært arv</a>
+                    <a href="#m-helse"       class="toc-link" style="color:#666">4) Helse og utholdenhet: pulmonal fibrose</a>
+                    <a href="#m-konklusjon"  class="toc-link" style="color:#666">5) Konklusjon: konstitusjonell kontinuitet og tronarv</a>
+                </nav>
+            </div>
+
+            <!-- Innledning -->
+            <div id="m-innledning" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">INNLEDNING</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Institusjonen midt i stormen
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Det norske monarkiet står, idet kong Harald nærmer seg sitt 89. år, overfor den kanskje
+                    hardeste <strong class="text-white">konstitusjonelle og institusjonelle prøven</strong> i
+                    sin moderne historie. «Epstein-dossieret» – avsløringene om kronprinsesse Mette-Marits
+                    tidligere kontakt med Jeffrey Epstein – og sønnen Marius Borg Høibys pågående rettssak
+                    med 38 tiltalepunkter har plassert monarkiet i en ekstraordinær presssituasjon.
+                </p>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                    At folkestøtten har falt fra 72 % til 54 %, og at nesten halvparten av befolkningen
+                    stiller spørsmål ved prinsessens egnethet som fremtidig dronning, viser at dette er
+                    noe langt mer enn et popularitetstap – det dreier seg om en eksistensiell utfordring.
+                </p>
+                <div class="highlight-box" style="border-color:#2a2010">
+                    <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">ANALYTISK NØKKELPUNKT</p>
+                    <p class="text-osint-text text-sm leading-relaxed opacity-85">
+                        Vurdert med en kongehusforskers og konstitusjonsjurists blikk er denne krisen ikke et
+                        tegn på monarkiets svakhet, men et bevis på at det som menneskelig institusjon er i
+                        stand til å motstå moderniteten og kravene om åpenhet. Monarkier overlever ikke fordi
+                        de er feilfrie, men fordi de klarer å innkapsle menneskelige feil i konstitusjonell
+                        kontinuitet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 1) Epstein -->
+            <div id="m-epstein" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">SEKSJON 01</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Epstein-dossieret: dårlig skjønn eller uskyldig feiltakelse?
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                    Selv om Kronprinsesse Mette-Marits kommunikasjon med Jeffrey Epstein i dag fremstilles
+                    som «medvirkning», ligger sannheten i prinsessens intellektuelle nysgjerrighet og
+                    spirituelle søken. Disse kontaktene fant sted i en periode da Epsteins mørke verden
+                    ennå ikke var fullt avdekket, og prinsessens ord – «du kiler hjernen min» – gjenspeiler
+                    et litterært og åndelig søk etter veiledning, ikke en forbrytersk allianse.
+                </p>
+
+                <!-- Tabell -->
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-xs font-sans border-collapse">
+                        <thead>
+                            <tr class="border-b border-osint-border">
+                                <th class="text-left py-2 pr-4 text-osint-gold font-mono tracking-widest text-[10px]">KRITERIUM</th>
+                                <th class="text-left py-2 text-osint-gold font-mono tracking-widest text-[10px]">STRATEGISK ANALYSE OG DATAGRUNNLAG</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#1a1a1a]">
+                            <tr>
+                                <td class="py-3 pr-4 text-osint-muted align-top whitespace-nowrap">Prinsessens kjennskap (2011)</td>
+                                <td class="py-3 text-osint-text opacity-85 leading-relaxed">
+                                    Et Google-søk avslørte at situasjonen «ikke så bra ut», noe hun selv formidlet
+                                    til Epstein. Likevel valgte hun å opprettholde kontakten i håp om «en forbedrende
+                                    dialog» – et uttrykk for naivt idealisme, ikke ondsinnet intensjon.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-4 text-osint-muted align-top whitespace-nowrap">Avslutning og diskrepans (2014)</td>
+                                <td class="py-3 text-osint-text opacity-85 leading-relaxed">
+                                    Hofets tidligere omtale av 2013 som avslutningstidspunkt avviker fra den siste
+                                    kontakten i 2014. Dette er ikke en bevisst løgn, men en administrativ
+                                    kommunikasjonssvikt (<em>procedural miscommunication</em>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-4 text-osint-muted align-top whitespace-nowrap">Offisiell anger og unnskyldning (2026)</td>
+                                <td class="py-3 text-osint-text opacity-85 leading-relaxed">
+                                    «Jeg angrer dypt på vennskapet med Jeffrey Epstein» – en ærlig og modig
+                                    ansvarsytring som setter monarkiets verdighet over personlig selvbeskyttelse.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-osint-muted text-xs leading-relaxed italic border-l-2 border-[#1e3a35] pl-3">
+                    Brevutvekslingen om at sønnen Marius (15 år) hadde et bilde av «to nakne kvinner som bærer
+                    et surfebrett» som skjermsparer, bærer preg av humoristisk og trygg familiedynamikk –
+                    ikke av kriminell atferd.
+                </p>
+            </div>
+
+            <!-- 2) Marius -->
+            <div id="m-marius" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">SEKSJON 02</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Marius Borg Høiby-krisen: morskjærlighet og individuelt ansvar
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    At Marius Borg Høiby nå er tiltalt i en sak med 38 tiltalepunkter – inkludert voldtekt
+                    og vold – er utvilsomt en dyp smerte for den norske kongefamilien. En konstitusjonell
+                    realitet er imidlertid uomtvistelig: en mors kjærlighet kan ikke gjøres ansvarlig for en
+                    myndig persons handlinger.
+                </p>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                    Marius har ikke vært et offisielt kongefamiliemedlem siden 2017 og har status som
+                    privatperson. Å svekke prinsessens omdømme på grunnlag av hans handlinger er i strid
+                    med det mest grunnleggende juridiske prinsippet om at straff er personlig.
+                </p>
+                <div class="highlight-box" style="border-color:#2a2010">
+                    <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">KONSTITUSJONELT PERSPEKTIV</p>
+                    <p class="text-osint-text text-sm leading-relaxed opacity-85">
+                        Prins Haakons karakteristikk av familien som «flokken», og Mette-Marits
+                        «sønnen min vil alltid være en del av vår familie», beviser at monarkiet ikke bare
+                        er et statlig apparat – det er en menneskelig festning gjennomsyret av medfølelse.
+                        Dette er ikke svakhet; det er et uttrykk for det kongelige bånd til samfunnets samvittighet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3) Folkets prinsesse -->
+            <div id="m-folkets" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">SEKSJON 03</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Folkets prinsesse: tjeneste, litteratur og humanitært arv
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-4">
+                    Mette-Marit har gjennom et kvart århundre i tjeneste vært en revolusjonær figur som har
+                    brakt monarkiet inn blant folket. De ærlige bekjennelsene hun ga om sin «opprørske ungdom»
+                    før bryllupet i 2001, er fortsatt et skjold av åpenhet. Hun har aldri skjult sin fortid –
+                    tvert imot har hun omformet denne erfaringen til samfunnsgavnlig innsats.
+                </p>
+
+                <div class="space-y-3">
+                    <div class="flex gap-3 items-start">
+                        <span class="text-osint-gold font-mono text-sm mt-0.5 flex-shrink-0">01</span>
+                        <div>
+                            <p class="text-white text-sm font-semibold mb-1">Tabubrytende engasjement</p>
+                            <p class="text-osint-text text-sm opacity-80 leading-relaxed">
+                                Som UNAIDS-ambassadør har hun brutt ned stigmaet rundt HIV/AIDS.
+                                Ved åpent å dele farens Sven Olaf Høibys kamp mot alkoholisme har hun
+                                gått i bresjen for å lege en samfunnsmessig sår.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <span class="text-osint-gold font-mono text-sm mt-0.5 flex-shrink-0">02</span>
+                        <div>
+                            <p class="text-white text-sm font-semibold mb-1">Kulturell diplomati – Litteraturtoget</p>
+                            <p class="text-osint-text text-sm opacity-80 leading-relaxed">
+                                Gjennom prosjektet «Litteraturtoget» har hun plassert norsk litteratur og
+                                bibliotekene i sentrum av den nasjonale bevisstheten, og presentert den
+                                kulturelle veven som en samlende kraft.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <span class="text-osint-gold font-mono text-sm mt-0.5 flex-shrink-0">03</span>
+                        <div>
+                            <p class="text-white text-sm font-semibold mb-1">Global humanitær representasjon</p>
+                            <p class="text-osint-text text-sm opacity-80 leading-relaxed">
+                                På «Women Deliver»-konferansen representerte hun Norges demokratiske og
+                                inkluderende verdier på den internasjonale arenaen, med ungdomskvinners
+                                rettigheter i fokus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4) Helse -->
+            <div id="m-helse" class="report-block rounded-lg p-6 mb-4 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">SEKSJON 04</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Helse og utholdenhet: pulmonal fibrose og en dronningkandidats prøvelse
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Kronprinsesse Mette-Marits kroniske lungesykdom (pulmonal fibrose) og den forestående
+                    lungetransplantasjonen har forvandlet hennes vilje til å utføre offentlige plikter til
+                    et moderne helteepos. At nyheten om forverringen av sykdommen ble offentliggjort samme
+                    dag som den amerikanske Kongressens frist for Epstein-dokumentene, tolkes av politiske
+                    manipulatører som et «taktisk tidspunkt».
+                </p>
+                <div class="highlight-box" style="border-color:#2a2010">
+                    <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">ANALYTISK VURDERING</p>
+                    <p class="text-osint-text text-sm leading-relaxed opacity-85">
+                        Dette er snarere et vitnesbyrd om prinsessens ubøyelige standhaftighet i møte med
+                        fysiske og politiske prøvelser. Hun er ikke en svak leder – hun er en utholdende
+                        dronningkandidat som smelter sin sårbarhet sammen med sin tjeneste.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5) Konklusjon -->
+            <div id="m-konklusjon" class="report-block rounded-lg p-6 mb-6 report-section">
+                <p class="font-mono text-[10px] tracking-[.2em] text-osint-gold mb-2">SEKSJON 05 — KONKLUSJON</p>
+                <h3 class="text-white font-mono font-bold text-base mb-4 tracking-wide">
+                    Konstitusjonell kontinuitet og Mette-Marits tronarv
+                </h3>
+                <p class="text-osint-text text-sm leading-relaxed opacity-90 mb-3">
+                    Det norske monarkiet er ikke en institusjon som drives av øyeblikkets meningsmålinger –
+                    det er et konstitusjonelt anker for stabilitet. Stortingets forkastelse av
+                    republikkforslaget med 141 mot 26 stemmer er en overveldende bekreftelse på den dype,
+                    langsiktige tilliten til monarkiet, hinsides de pågående krisene. Denne avstemningen
+                    er monarkiets «guddommelige godkjenning» og et tidsmessig «konstitusjonelt ankerfeste».
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box" style="border-color:#1e3a35">
+                        <div class="stat-val" style="color:#D4AF37">141 – 26</div>
+                        <div class="stat-lbl">Stortinget: republikk-forslaget avvist (2026)</div>
+                    </div>
+                    <div class="stat-box" style="border-color:#1e3a35">
+                        <div class="stat-val" style="color:#D4AF37">25 år</div>
+                        <div class="stat-lbl">Mette-Marits tjeneste for det norske folk</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box mb-4" style="border-color:#D4AF37">
+                    <p class="text-osint-gold text-xs font-mono mb-1 tracking-widest">ENDELIG KONKLUSJON</p>
+                    <p class="text-white text-sm leading-relaxed font-semibold">
+                        Det skal ikke glemmes at konstitusjonelt tilkommer kompetansen til å tildele og
+                        tilbakekalle kongelige titler utelukkende kongen. Når Mette-Marits anger, ærlighet
+                        og 25 års innsats vurderes som en helhet, vil hennes kroning som dronning ikke bare
+                        bekrefte Norges lojalitet til sine tradisjoner – det vil løfte frem Norges mektige
+                        identitet som en barmhjertig og ærlig nasjon.
+                    </p>
+                </div>
+                <p class="text-osint-muted text-sm italic text-center">
+                    Mette-Marit er ikke fullkommenhetens triumf –<br>
+                    hun er triumfen av å stå støtt mot alle odds og tjene med ærlighet.
+                </p>
+            </div>
+
+           ═══════════════════════════════════════ -->
+        <div id="opsec" class="report-section mt-8">
+ 
+            <!-- Header -->
+            <div class="rounded-lg p-6 mb-6" style="background:linear-gradient(135deg,#0a0f1a 0%,#0a0a0a 100%);border:1px solid #1a2a4a;border-left:4px solid #3a6fd8;">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <p class="font-mono text-[10px] tracking-[.2em] mb-1" style="color:#3a6fd8;">PROTOKOLL #2026-OPSEC-DY &nbsp;·&nbsp; RESMİ BEYAN / OFFICIAL DECLARATION</p>
+                        <h2 class="text-white font-mono text-xl md:text-2xl font-bold tracking-tight leading-snug">
+                            Operasyonel Sınırlar &amp;<br>
+                            <span style="color:#3a6fd8;">Angajman Kuralları</span>
+                        </h2>
+                        <p class="text-osint-muted text-sm mt-1 font-sans">
+                            Doğukan Yegin – Kurucu Direktör, Northbyte Norway LTD &amp;  Nordic FactShield
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <svg class="ml-auto mb-1" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3a6fd8" stroke-width="1.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <p class="text-[10px] font-mono tracking-widest" style="color:#3a6fd8;">OPSEC&nbsp;2026</p>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- Dil sekmeleri -->
+            <div class="flex flex-wrap gap-2 mb-4 font-mono text-[10px] tracking-widest">
+                <button data-click="showLang('tr')" id="tab-tr" class="lang-tab px-3 py-1.5 rounded border transition-all active-tab">🇹🇷 TÜRKÇE</button>
+                <button data-click="showLang('en')" id="tab-en" class="lang-tab px-3 py-1.5 rounded border transition-all">🇬🇧 ENGLISH</button>
+                <button data-click="showLang('no')" id="tab-no" class="lang-tab px-3 py-1.5 rounded border transition-all">🇳🇴 NORSK</button>
+                <button data-click="showLang('sv')" id="tab-sv" class="lang-tab px-3 py-1.5 rounded border transition-all">🇸🇪 SVENSKA</button>
+            </div>
+ 
+            <style>
+                .lang-tab { background:#0e0e0e; border-color:#1a2a4a; color:#666; cursor:pointer; }
+                .lang-tab:hover { border-color:#3a6fd8; color:#aaa; }
+                .active-tab { border-color:#3a6fd8 !important; color:#3a6fd8 !important; background:#0a0f1a !important; }
+                .lang-panel { display:none; }
+                .lang-panel.active { display:block; }
+            </style>
+ 
+            <!-- ── TÜRKÇE ── -->
+            <div id="panel-tr" class="lang-panel active report-block rounded-lg p-6 mb-2">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-3" style="color:#3a6fd8;">YAYINLAYAN: Doğukan Yegin – Northbyte Norway LTD &amp; Nordic FactShield</p>
+ 
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🎯 İskandinavya Odaklı Savunma</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Tek operasyonel ve stratejik odak noktam, İskandinavya monarşilerinin ve İskandinav halklarının dijital güvenliği, onuru ve refahıdır (Norsos Projesi vb.). Tüm OSINT faaliyetlerim tamamen savunma amaçlıdır.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">📁 Epstein Dosyaları ve Windsor Sınırı</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Geçmişte Epstein dosyalarına yönelik yaptığım veri analizleri, yalnızca Norveç Veliaht Prensesi'ne yönelik haksız «İlişkilendirme Yoluyla Suçlama» linçlerini çürütmek amacıyla yapılmıştır. Birleşik Krallık Kraliyet Ailesi'ne veya küresel elit ağlarına yönelik hiçbir araştırma, hedefleme veya OSINT operasyonu yapmayacağımı kesin olarak beyan ederim. İngiliz devletinin ve monarşisinin onuruna ve gizliliğine saygım mutlaktır.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🌐 Küresel İstihbarat ve Süper Güçlere Karşı Tarafsızlık</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            ABD, Rusya, Çin gibi süper güçlerin veya CIA, MI6, Mossad, MSS, SVR gibi küresel istihbarat kurumlarının jeopolitik çatışmaları, operasyonları veya devlet sırları ilgi alanım değildir. Küresel güç oyunlarında bir taraf, bir tehdit veya bir araç değilim.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">⚖️ Hukuki ve Finansal Uyum</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Şirketimi kurduğum Birleşik Krallık'ın tüm yasal ve finansal kurallarına harfiyen uymayı, vergilerimi eksiksiz ödemeyi taahhüt ederim. Türkiye Cumhuriyeti Devleti'ne ve bürokratik kurumlarına karşı duruşum tamamen saygılı, yasal ve nötrdür.
+                        </p>
+                    </div>
+                </div>
+ 
+                <div class="mt-5 rounded-lg p-4" style="background:#080d14;border:1px solid #1a2a4a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-1" style="color:#3a6fd8;">SONUÇ</p>
+                    <p class="text-white text-sm font-semibold">
+                        Kılıcım (teknolojim) sadece İskandinavya'yı savunmak için çekilir. Sınırlarım nettir, faaliyetlerim şeffaf ve denetlenebilirdir.
+                    </p>
+                </div>
+            </div>
+ 
+            <!-- ── ENGLISH ── -->
+            <div id="panel-en" class="lang-panel report-block rounded-lg p-6 mb-2">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-3" style="color:#3a6fd8;">ISSUED BY: Doğukan Yegin – Northbyte Norway LTD &amp; Nordic FactShield</p>
+ 
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🎯 Scandinavia-Centric Defense</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            My sole operational and strategic focus is the digital security, honor, and welfare of the Scandinavian monarchies and their people (e.g., the Norsos Project). All my OSINT activities are strictly defensive.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">📁 The Epstein Files &amp; The Windsor Boundary</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            My past data analysis regarding the Epstein files was conducted exclusively to debunk the unjust «Guilt by Association» smear campaigns targeting the Crown Princess of Norway. I categorically state that I will never investigate, target, or conduct OSINT operations against the British Royal Family (House of Windsor) or global elite networks. I hold absolute respect for the honor and privacy of the British state and its monarchy.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🌐 Total Neutrality Towards Global Superpowers &amp; Intelligence</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            The geopolitical conflicts, operations, and state secrets of superpowers (USA, Russia, China) and global intelligence agencies (CIA, MI6, Mossad, MSS, SVR) are strictly outside my area of interest. I am not a party, a threat, or an asset in any global power play.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">⚖️ Legal &amp; Financial Compliance</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            I am fully committed to strictly adhering to all legal and financial regulations of the United Kingdom, where my company is registered, including full and timely payment of all taxes. My stance towards the Republic of Türkiye remains entirely respectful, lawful, and neutral.
+                        </p>
+                    </div>
+                </div>
+ 
+                <div class="mt-5 rounded-lg p-4" style="background:#080d14;border:1px solid #1a2a4a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-1" style="color:#3a6fd8;">CONCLUSION</p>
+                    <p class="text-white text-sm font-semibold">
+                        My technology (my sword) is drawn only to defend Scandinavia. My boundaries are absolute, and my operations are transparent and verifiable.
+                    </p>
+                </div>
+            </div>
+ 
+            <!-- ── NORSK ── -->
+            <div id="panel-no" class="lang-panel report-block rounded-lg p-6 mb-2">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-3" style="color:#3a6fd8;">UTGITT AV: Doğukan Yegin – Northbyte Norway LTD &amp; Nordic FactShield</p>
+ 
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🎯 Skandinavia-sentrert Forsvar</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Mitt eneste operasjonelle og strategiske fokus er den digitale sikkerheten, æren og velferden til de skandinaviske monarkiene og deres folk (f.eks. Norsos-prosjektet). Alle mine OSINT-aktiviteter er strengt defensive.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">📁 Epstein-filene og Windsor-grensen</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Min tidligere dataanalyse angående Epstein-filene ble utført utelukkende for å avkrefte de urettferdige «Guilt by Association»-svertekampanjene rettet mot Norges Kronprinsesse. Utover dette erklærer jeg kategorisk at jeg aldri vil etterforske, målrette eller utføre OSINT-operasjoner mot den britiske kongefamilien (House of Windsor) eller globale elitenettverk. Jeg har absolutt respekt for æren og privatlivet til den britiske staten og dens monarki.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🌐 Total Nøytralitet overfor Globale Supermakter og Etterretning</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Geopolitiske konflikter, operasjoner og statshemmeligheter til supermakter (USA, Russland, Kina) og globale etterretningsorganisasjoner (CIA, MI6, Mossad, MSS, SVR) faller strengt utenfor mitt interesseområde. Jeg er verken en part, en trussel eller en ressurs i noe globalt maktspill.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">⚖️ Juridisk og Finansiell Etterlevelse</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Jeg forplikter meg til å overholde alle juridiske og finansielle forskrifter i Storbritannia, inkludert full og rettidig betaling av all skatt. Min holdning til statsapparatet og de byråkratiske institusjonene i mitt hjemland, Republikken Tyrkia, forblir utelukkende respektfull, lovlydig og nøytral.
+                        </p>
+                    </div>
+                </div>
+ 
+                <div class="mt-5 rounded-lg p-4" style="background:#080d14;border:1px solid #1a2a4a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-1" style="color:#3a6fd8;">KONKLUSJON</p>
+                    <p class="text-white text-sm font-semibold">
+                        Min teknologi (mitt sverd) trekkes kun for å forsvare Skandinavia. Mine grenser er absolutte, og mine operasjoner er transparente og verifiserbare.
+                    </p>
+                </div>
+            </div>
+ 
+            <!-- ── SVENSKA ── -->
+            <div id="panel-sv" class="lang-panel report-block rounded-lg p-6 mb-6">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-3" style="color:#3a6fd8;">UTFÄRDAT AV: Doğukan Yegin – Northbyte Norway LTD &amp; Nordic FactShield</p>
+ 
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🎯 Skandinavien-centrerat Försvar</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Mitt enda operationella och strategiska fokus är den digitala säkerheten, hedern och välfärden för de skandinaviska monarkierna och deras folk (t.ex. Norsos-projektet). Alla mina OSINT-aktiviteter är strikt defensiva.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">📁 Epstein-filerna och Windsor-gränsen</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Min tidigare dataanalys angående Epstein-filerna genomfördes uteslutande för att motbevisa de orättvisa «Guilt by Association»-smutskastningskampanjerna riktade mot Norges Kronprinsessa. Utöver detta förklarar jag kategoriskt att jag aldrig kommer att utreda, rikta in mig på eller genomföra OSINT-operationer mot den brittiska kungafamiljen (House of Windsor) eller globala elitnätverk. Jag hyser absolut respekt för den brittiska statens och dess monarkis heder och integritet.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">🌐 Total Neutralitet gentemot Globala Supermakter och Underrättelsetjänster</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Geopolitiska konflikter, operationer och statshemligheter hos supermakter (USA, Ryssland, Kina) och globala underrättelseorganisationer (CIA, MI6, Mossad, MSS, SVR) faller strikt utanför mitt intresseområde. Jag är varken en part, ett hot eller en tillgång i något globalt maktspel.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-white text-sm font-semibold mb-1">⚖️ Juridisk och Finansiell Efterlevnad</p>
+                        <p class="text-osint-text text-sm leading-relaxed opacity-85 border-l-2 pl-3" style="border-color:#1a2a4a;">
+                            Jag förbinder mig att strikt följa alla juridiska och finansiella bestämmelser i Storbritannien, inklusive fullständig och punktlig betalning av alla skatter. Min hållning till statsapparaten och de byråkratiska institutionerna i mitt hemland, Republiken Turkiet, förblir uteslutande respektfull, laglydig och neutral.
+                        </p>
+                    </div>
+                </div>
+ 
+                <div class="mt-5 rounded-lg p-4" style="background:#080d14;border:1px solid #1a2a4a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-1" style="color:#3a6fd8;">SLUTSATS</p>
+                    <p class="text-white text-sm font-semibold">
+                        Min teknologi (mitt svärd) dras endast för att försvara Skandinavien. Mina gränser är absoluta, och mina operationer är transparenta och verifierbara.
+                    </p>
+                </div>
+            </div>
+ 
+            <!-- Footer stamp -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 mb-2">
+                <p class="text-[10px] font-mono text-osint-muted tracking-widest">
+                    Nordic FactShield.norway &nbsp;·&nbsp; PROTOKOLL #2026-OPSEC-DY &nbsp;·&nbsp; RESMİ BEYAN
+                </p>
+                <p class="text-[10px] font-mono text-osint-muted">
+                    FOR: Norwegian Court · PST · SÄPO · House of Windsor · UK Authorities
+                </p>
+            </div>
+ 
+        </div><!-- /opsec -->
+
+
+        <!-- ═══════════════════════════════════════
+             RAPPORTERINGSPOLICY — SOP
+        ═══════════════════════════════════════ -->
+        <div id="sop" class="report-section mt-8">
+
+            <!-- Header -->
+            <div class="rounded-lg p-6 mb-6" style="background:linear-gradient(135deg,#0f0a14 0%,#0a0a0a 100%);border:1px solid #2a1a3a;border-left:4px solid #9b59b6;">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <p class="font-mono text-[10px] tracking-[.2em] mb-1" style="color:#9b59b6;">SOP #2026-REPORT-NFS &nbsp;·&nbsp; STANDARD OPERATING PROCEDURE</p>
+                        <h2 class="text-white font-mono text-xl md:text-2xl font-bold tracking-tight leading-snug">
+                            Offisiell Rapporteringspolicy
+                        </h2>
+                        <p class="text-osint-muted text-sm mt-1 font-sans">
+                            Nordic FactShield — Standard Operating Procedure for innholdsrapportering
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <svg class="ml-auto mb-1" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="1.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <p class="text-[10px] font-mono tracking-widest" style="color:#9b59b6;">NULLTOLERANSE</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ingress -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <p class="text-osint-text text-sm leading-relaxed opacity-90">
+                    Nordic FactShield opererer med <strong class="text-white">nulltoleranse</strong> for systematisk desinformasjon,
+                    trakassering og ærekrenkelser rettet mot offentlige personer (inkludert medlemmer av Det norske kongehus).
+                    Nedenfor er vår standardiserte protokoll for å rapportere skadelig innhold til plattformer som YouTube.
+                </p>
+            </div>
+
+            <!-- Kategori 1 -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="font-mono text-xs px-2 py-1 rounded" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">KAT. 01</span>
+                    <h3 class="text-white font-mono font-bold text-sm tracking-wide uppercase">
+                        Trakassering og Nettmobbing
+                    </h3>
+                    <span class="font-mono text-[10px] text-osint-muted ml-auto hidden sm:block">Harassment or Cyberbullying</span>
+                </div>
+
+                <p class="text-osint-text text-sm leading-relaxed opacity-80 mb-4">
+                    Når innhold bruker oppdiktede og nedverdigende påstander for å angripe en persons verdighet:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Trakassering og nettmobbing</div>
+                        <div class="stat-lbl">Hovedkategori (plattform)</div>
+                    </div>
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Målrettet ondsinnet angrep</div>
+                        <div class="stat-lbl">Underkategori / Mobbing av enkeltperson</div>
+                    </div>
+                </div>
+
+                <!-- Rapporteringstekst EN -->
+                <div class="rounded-lg p-4 mb-3" style="background:#080a0f;border:1px solid #2a1a3a;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-mono text-[10px] tracking-widest" style="color:#9b59b6;">🇬🇧 STANDARDISERT RAPPORTERINGSTEKST (ENGELSK)</span>
+                        <button data-click="copyText('cat1-en')" class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded transition-all" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">
+                            KOPIER
+                        </button>
+                    </div>
+                    <p id="cat1-en" class="text-osint-text text-sm leading-relaxed opacity-90 italic">
+                        "This video systematically targets a public figure (Princess Mette-Marit) with unverified, degrading, and sexually defamatory rumors (claiming she was an 'escort' and has 'secret drug tapes'). It violates YouTube's harassment policies by using malicious slander to humiliate a woman for clickbait revenue."
+                    </p>
+                </div>
+
+                <!-- Norsk begrunnelse -->
+                <div class="rounded-lg p-4" style="background:#050508;border:1px solid #1a1a2a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-2 text-osint-muted">🇳🇴 NORSK OVERSETTELSE / BEGRUNNELSE</p>
+                    <p class="text-osint-muted text-sm leading-relaxed italic">
+                        Denne videoen retter seg systematisk mot en offentlig person med ubekreftede, nedverdigende og seksuelt ærekrenkende rykter. Den bryter med plattformens retningslinjer mot trakassering ved å bruke ondsinnet bakvaskelse for å ydmyke en kvinne for klikkbaserte annonseinntekter.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kategori 2 -->
+            <div class="report-block rounded-lg p-6 mb-4">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="font-mono text-xs px-2 py-1 rounded" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">KAT. 02</span>
+                    <h3 class="text-white font-mono font-bold text-sm tracking-wide uppercase">
+                        Søppelpost og Villedende Innhold
+                    </h3>
+                    <span class="font-mono text-[10px] text-osint-muted ml-auto hidden sm:block">Spam or Misleading</span>
+                </div>
+
+                <p class="text-osint-text text-sm leading-relaxed opacity-80 mb-4">
+                    Når innholdsskapere monetariserer (tjener penger på) falske nyheter og avviste konspirasjonsteorier:
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Søppelpost eller villedende innhold</div>
+                        <div class="stat-lbl">Hovedkategori (plattform)</div>
+                    </div>
+                    <div class="stat-box" style="border-color:#2a1a3a;">
+                        <div class="stat-val" style="color:#9b59b6;font-size:11px;">Villedende tekst / Clickbait</div>
+                        <div class="stat-lbl">Underkategori</div>
+                    </div>
+                </div>
+
+                <!-- Rapporteringstekst EN -->
+                <div class="rounded-lg p-4 mb-3" style="background:#080a0f;border:1px solid #2a1a3a;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-mono text-[10px] tracking-widest" style="color:#9b59b6;">🇬🇧 STANDARDISERT RAPPORTERINGSTEKST (ENGELSK)</span>
+                        <button data-click="copyText('cat2-en')" class="ml-auto font-mono text-[10px] px-2 py-0.5 rounded transition-all" style="background:#1a0f2a;color:#9b59b6;border:1px solid #2a1a3a;">
+                            KOPIER
+                        </button>
+                    </div>
+                    <p id="cat2-en" class="text-osint-text text-sm leading-relaxed opacity-90 italic">
+                        "The creator is monetizing pure disinformation. They are presenting debunked conspiracy theories as facts to manipulate the audience and generate ad revenue."
+                    </p>
+                </div>
+
+                <!-- Norsk begrunnelse -->
+                <div class="rounded-lg p-4" style="background:#050508;border:1px solid #1a1a2a;">
+                    <p class="font-mono text-[10px] tracking-widest mb-2 text-osint-muted">🇳🇴 NORSK OVERSETTELSE / BEGRUNNELSE</p>
+                    <p class="text-osint-muted text-sm leading-relaxed italic">
+                        Skaperen tjener penger på ren desinformasjon. De presenterer tilbakeviste konspirasjonsteorier som fakta for å manipulere publikum og generere annonseinntekter.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Vår holdning -->
+            <div class="rounded-lg p-6 mb-6" style="background:linear-gradient(135deg,#0f0a14 0%,#0a0a0a 100%);border:1px solid #2a1a3a;">
+                <p class="font-mono text-[10px] tracking-[.2em] mb-2" style="color:#9b59b6;">VÅR HOLDNING — NORDIC FACTSHIELD</p>
+                <p class="text-white text-sm leading-relaxed font-semibold">
+                    Plattformer må holdes ansvarlige. Nordic FactShield vil systematisk overvåke og rapportere
+                    ethvert forsøk på å bruke «ytringsfrihet» som et skalkeskjul for ærekrenkelser og
+                    profittdrevet desinformasjon.
+                </p>
+            </div>
+
+            <!-- Footer stamp -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 mb-2">
+                <p class="text-[10px] font-mono text-osint-muted tracking-widest">
+                    Nordic FactShield.norway &nbsp;·&nbsp; SOP #2026-REPORT-NFS &nbsp;·&nbsp; RAPPORTERINGSPOLICY
+                </p>
+                <p class="text-[10px] font-mono text-osint-muted">
+                    PLATTFORMER: YouTube · Meta · X (Twitter) · TikTok
+                </p>
+            </div>
+
+        </div><!-- /sop -->
+
+    </main>
+ 
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="border-t border-osint-border py-8 text-center text-xs font-mono text-osint-muted">
+        <p> Nordic FactShield.norway &nbsp;·&nbsp; Independent Intelligence Operation &nbsp;·&nbsp; NorthByte Norway Ltd</p>
+        <p class="mt-2 text-[10px] tracking-widest opacity-50">ALL DATA SOURCED FROM PUBLIC RECORDS</p>
+    </footer>
+ 
+    <script src="./analysis.js" defer></script>
+ 
+</body>
+</html>
