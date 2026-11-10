@@ -5,7 +5,7 @@
             navigator.clipboard.writeText(el.innerText).then(() => {
                 const btns = document.querySelectorAll('button[data-click="copyText(\'' + id + '\')"]');
                 btns.forEach(b => { b.innerText = 'KOPIERT ✓'; setTimeout(() => b.innerText = 'KOPIER', 2000); });
-            });
+            }).catch(() => { window.alert('Clipboard unavailable. Please select and copy the text manually.'); });
         }
 
         function toggleAcc(id) {
@@ -45,3 +45,5 @@
         });
     
 document.querySelectorAll('[data-click]').forEach(el=>{const action=el.dataset.click; const match=/^(toggleAcc|showLang|copyText)\('([a-z0-9-]+)'\)$/.exec(action); const run=()=>{if(match)({toggleAcc,showLang,copyText})[match[1]](match[2]);else if(action==="window.location.href='/'")location.assign('./');};el.addEventListener('click',run);if(el.tagName!=='BUTTON'){el.tabIndex=0;el.setAttribute('role','button');el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();run();}});}});
+
+document.querySelectorAll('[data-click^="toggleAcc"]').forEach(el => { const id = /^toggleAcc\('([a-z0-9-]+)'\)$/.exec(el.dataset.click)?.[1]; if (!id) return; el.setAttribute('aria-controls', id); const sync = () => el.setAttribute('aria-expanded', String(document.getElementById(id).classList.contains('expanded'))); sync(); el.addEventListener('click', sync); el.addEventListener('keydown', () => queueMicrotask(sync)); });

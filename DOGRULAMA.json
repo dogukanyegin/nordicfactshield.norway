@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "languageCounts": {
+    "nb": 89,
+    "en": 205,
+    "tr": 87,
+    "ru": 87,
+    "unknown": 0
+  },
+  "desktopLayout": {
+    "columns": 2,
+    "gap": 20,
+    "margin": 160,
+    "overflow": false,
+    "css": 2
+  },
+  "checks": [
+    "all 468 records",
+    "search and combined language filter",
+    "five sort orders",
+    "pagination and preserved filters",
+    "desktop/mobile layout",
+    "analysis accordions and language tabs",
+    "error/retry and empty archive",
+    "pagination across 500-row API boundary",
+    "Markdown XSS payload inert",
+    "CSP blocks inline scripts"
+  ],
+  "pageErrors": [],
+  "original_analysis_text_unchanged": true,
+  "original_introduction_unchanged": true,
+  "typescript_build": "passed",
+  "unit_tests": "4 passed",
+  "dependency_audit": "0 known vulnerabilities at verification",
+  "sql_syntax": "passed (not executed on live database)",
+  "supabase_live_read": {
+    "status": 200,
+    "returned_rows": 1,
+    "method": "GET",
+    "write_permissions_tested": false
+  },
+  "live_deployment_performed": false,
+  "live_rls_applied": false
+}

@@ -1,26 +1,44 @@
-# Modernize edilmiş Nordic FactShield
+# Nordic FactShield — GitHub Pages + mevcut Supabase
 
-## Çalıştırma
-Node.js 22 veya üzeri. `npm ci`, `npm run build`, ardından `npm run preview`.
-Geliştirme için önce `npm run styles`, ardından `npm run dev`.
-Yayınlanacak klasör: dist. Mevcut GitHub Pages iş akışı korunmuştur.
+## Yayınlama
+1. Node.js 22.18 veya üzeri kullanın. `npm ci`, `npm test`, `npm run build`. Yayın çıktısı `dist` klasörüdür.
+2. ZIP içindeki proje klasörünün içeriğini depo köküne yükleyin. Gizli `.github` klasörünü de yükleyin; kaynak klasörünü iç içe eklemeyin.
+3. GitHub deposunda Settings → Pages → Source: **GitHub Actions**. `main` dalına gönderim otomatik yayınlar. Actions → Deploy to GitHub Pages → Run workflow ile elle de başlatılabilir.
+4. Mevcut özel alan adı ve DNS ayarlarını koruyun. Pages ayarlarında Enforce HTTPS etkin olmalı. Göreli yollar hem özel alan adında hem `kullanici.github.io/depo/` adresinde çalışır.
+5. Tam paket kullanın; yalnız `index.tsx` değiştirmek yeterli değildir. Bu sürüm, kaynak CSS ile derlenmiş CSS adlarının çakışmasını giderir. CSS kaynağı `theme.source.css`, üretilen dosya `public/theme.css`.
 
-## Yapılanlar
-Ana site ve analiz sayfasında ortak lacivert/turkuaz tema, mobil düzen, klavye odağı ve azaltılmış hareket desteği. Analiz metinleri, kaynaklar, dil panelleri ve kayıt içerikleri korunmuştur. Tailwind CDN betiği ve uzak fontlar kaldırılmış, CSS yerelde üretilmiştir. Analiz sayfasındaki olaylar yerel JavaScript dosyasına taşınmıştır. CSP, dış betikleri ve eval çalıştırılmasını engeller; satır içi stiller mevcut analiz görünümü için izinlidir. React kayıt metinlerini HTML olarak çalıştırmaz. Kayıt yükleme hatası boş arşiv olarak gösterilmez; yeniden deneme bulunur. Supabase oturum saklama kapalıdır. Bağımlılıklar ve kilit dosyası sabitlenmiştir.
+Yerel geliştirme: önce `npm run styles`, sonra `npm run dev`. Geliştirme sunucusu yalnız 127.0.0.1 üzerinden açılır. Yeni CSS sınıfı eklerken `npm run styles` yeniden çalıştırılmalıdır.
 
-## Canlıda uygulanması gerekenler
-1. Supabase yedeği ve deneme ortamı üzerinde `security/public-readonly.sql` dosyasını inceleyip çalıştırın. Bu işlem iki istemci rolünün tabloya yazmasını engeller; yayınlama güvenilir sunucu üzerinden yapılmalıdır. Mevcut RLS kurallarını ve RPC fonksiyonlarını ayrıca denetleyin. Bu SQL canlıda çalıştırılmadı. Anon anahtarının tarayıcıda bulunması normaldir; gizli service_role anahtarı kullanmayın.
-2. Bu sürüm doğrudan GitHub Pages içindir; `_headers` kullanılmaz. CSP ve referrer kuralları HTML meta etiketleriyle uygulanır. GitHub Pages üzerinden özel HTTP güvenlik başlıkları eklenemez; iframe engellemesi bu pakette etkin değildir. DDoS koruması barındırma sağlayıcısının altyapısına bağlıdır; bu paket WAF veya hız sınırı etkinleştirmez.
-3. Alan adı ve GitHub hesaplarında MFA, korumalı ana dal ve gözden geçirilen dağıtım izinleri kullanın. DNS ve CDN yönetim erişimini sınırlayın.
-4. CDN üzerinde DDoS koruması, WAF ve gerçek trafiğe göre hız sınırı uygulayın. Statik dosyaları önbelleğe alın; Supabase API trafiği doğrudan servise gittiğinden yalnız site CDN kuralıyla korunmaz. Gerekirse API gateway ve sunucu tarafı kota ekleyin.
-5. İçerik yedekleri, geri dönüş sürümleri, erişilebilirlik izlemesi ve olay kayıtları tutun. Güncellemelerde `npm audit` ve üretim derlemesini yeniden çalıştırın.
+## Arşiv düzeni
+Başlık, tam kayıt metni, yazar, kayıt numarası ve dosya adlarıyla arama yapılır. Birden fazla sözcük birlikte aranır. Türkçe büyük/küçük harf, aksanlar ve Norveççe karakterler aramada normalleştirilir; saklanan metin değişmez. Dil filtresi, en yeni/en eski, A–Z/Z–A ve dile göre sıralama birlikte çalışır. Sayfada 12 kayıt gösterilir. Detaydan geri dönünce filtreler ve sayfa korunur.
 
-Bu paket bütün saldırılara veya herhangi bir grubun tüm yöntemlerine karşı garanti vermez. Canlı Supabase izinleri, DNS, barındırma ve DDoS dayanıklılığı bu çalışma sırasında test edilmedi. Tasarım tarayıcıda görsel olarak doğrulanmadı; üretim derlemesi, tip kontrolü ve içerik karşılaştırması doğrulandı.
+Dil, başlık ve metinden tahmin edilir; dil sütunu bulunmadığından etiketler kesin çeviri metadata bilgisi değildir. Yeni veya çok dilli kayıtlar belirsiz kategoriye düşebilir. Tekrarlanan kayıtlar silinmez. Tam başlık detayda gösterilir; kart başlıkları yalnız görünümde kısaltılır. Önizlemeler tekrarlanan rapor üst bilgilerini atlayabilir. Kayıt metinlerine, analizlere ve veritabanı içeriğine bu paket tarafından yazılmaz.
 
-Kaynaklar: https://supabase.com/docs/guides/database/secure-data ve https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors
+Mevcut Supabase okuma bağlantısı korunmuştur. Arşiv artık 500 kayıtlık API sayfalarını birleştirir; API satır sınırı nedeniyle kayıtların sessizce eksik listelenmesi önlenir. Gönderilen 468 kayıtla yapılan arayüz testleri, canlı verinin değiştirilmesi anlamına gelmez. Önceki veri redaksiyonu ayrı bir dosya çalışmasıdır ve otomatik uygulanmaz.
 
+## Uygulanan korumalar
+- Yerel CSS/JavaScript; Tailwind CDN ve uzak font çalıştırma yok.
+- CSP: yalnız aynı kaynaktan betikler, satır içi olay betikleri kapalı, eval kapalı, eklenti nesneleri/iframe yükleme/form gönderimi kapalı. Veri bağlantısı yalnız aynı kaynak ve mevcut Supabase alan adı. Eski analiz sayfasının görünümünü korumak için satır içi stil öznitelikleri izinlidir; satır içi style blokları yerel CSS dosyalarına taşındı.
+- Markdown ham HTML olarak çalıştırılmaz. JavaScript bağlantıları filtrelenir. Uzak görseller otomatik yüklenmez; kaynak bağlantısıyla sunulur. Yeni pencerede açılan bağlantılarda noopener/noreferrer vardır.
+- Supabase tarayıcı oturum saklama, otomatik oturum yenileme ve URL oturum algılama kapalı. Arayüzde veritabanına yazan işlem yok. Yanıt yapısı doğrulanır, hata ve yeniden deneme vardır; eski hata boş arşiv gibi sunulmaz.
+- Paketler kilit dosyasına bağlı. GitHub Actions sürümleri doğrulanmış tam commit SHA ile sabit. İş akışı asgari token yetkisi, kalıcı checkout kimlik bilgisi olmadan kurulum, süre sınırı, test, derleme ve moderate üzeri bağımlılık denetimi içerir. Dependabot yapılandırması paket ve Actions güncellemeleri için haftalık PR açar.
 
-## GitHub Pages yayını
-Depoda Settings → Pages → Build and deployment → Source: GitHub Actions seçin. ZIP içindeki proje klasörünün içeriğini (gizli `.github` klasörü dâhil) main dalına yükleyin. main push otomatik yayınlar; Actions üzerinden elle de çalıştırılabilir. Kaynak klasörünü iç içe eklemeyin.
+## Supabase korumasını etkinleştirme — henüz uygulanmadı
+`security/public-readonly.sql` dosyasını Supabase SQL Editor içinde yetkili yönetici olarak uygulayın. Dosya kayıt içeriğini değiştirmez. `public.factshield` tablosunda RLS'yi açar, PUBLIC/anon/authenticated tablo ve sütun yazma yetkilerini kaldırır; yalnız arşivin altı sütununa okuma verir. Ayrıca üç kısıtlayıcı politika tarayıcı rollerinin INSERT/UPDATE/DELETE işlemlerini engeller. Kalıtılmış yazma yetkisi veya RLS atlayan tarayıcı rolü görülürse işlem iptal olur. Güvenilir owner/service_role üzerinden yayınlama erişimi değiştirilmez. service_role anahtarı tarayıcıya veya GitHub deposuna eklenmemelidir; mevcut anon anahtarı herkese açık istemci anahtarıdır.
 
-Göreli yollar hem `kullanici.github.io/depo/` hem mevcut özel alan adı altında çalışır. Özel alan adı ayarını Settings → Pages içinde koruyun; paket DNS ayarını değiştirmez. `.nojekyll` ve Google doğrulama dosyaları dist içine alınır. Supabase bağlantısı korunur; sunucu veya Gemini anahtarı gerekmez.
+Ardından `security/verify-readonly.sql` çalıştırın: `rls_enabled=true`, yazma yetkisi sütunları `false` beklenir. Okuma erişiminin mevcut politikalarla uyumlu olduğunu kontrol edin. Son sorgu, erişilebilir SECURITY DEFINER fonksiyonlarını listeler; bunlar sahip yetkisiyle işlem yapabileceğinden tek tek incelenmelidir. Bu paket diğer tablolar, Storage, RPC fonksiyonları veya rol üyeliklerinin tam denetimi değildir.
+
+## GitHub ve altyapı sınırları
+GitHub Pages `_headers` dosyasını uygulamaz. Bu pakette sahte HTTP başlığı yapılandırması yoktur. Meta CSP gerçek olarak çalışır; fakat frame-ancestors, HSTS, X-Frame-Options ve Permissions-Policy gibi özel HTTP başlıklarının bu paketle etkinleştiği iddia edilmez. `frame-src 'none'`, sitenin kendi içine iframe yüklemesini engeller; başka sitelerin bu siteyi iframe'e almasını engellemez.
+
+GitHub hesabı ve alan adı yönetiminde MFA, main dalında koruma/inceleme şartı, sınırlı yönetici erişimi, Pages dağıtım ortamında koruma ve yedekler kullanın. Bunlar hesap ayarıdır; bu paketi yüklemek tek başına etkinleştirmez. Supabase API'si doğrudan çağrıldığından site önündeki CDN, API'yi tek başına korumaz. DDoS, bot, kota ve maliyet saldırıları için sağlayıcı planı/kota/izleme veya ayrı API gateway gerekir. Mevcut sistemi koruma tercihi gereği yeni sunucu eklenmemiştir.
+
+## Kontroller ve dürüst sınırlar
+`DOGRULAMA.json` test sonuçlarını içerir. 468 kayıtla masaüstü/mobil görünüm, arama, beş sıralama, dil filtresi, sayfalama, geri dönüşte filtre koruma, 500 kayıt API sınırı, boş arşiv, hata/yeniden deneme, analiz sayfası etkileşimleri, XSS örneği ve satır içi betiğin CSP ile engellenmesi tarayıcıda kontrol edildi. TypeScript/derleme ve bağımlılık denetimi geçti. SQL PostgreSQL ayrıştırıcısından geçti; canlıda çalıştırılmadı. Supabase'e yalnız okuma amaçlı tek kayıt sorgusu başarılı oldu; bu, yazma yetkilerinin kapalı olduğunu kanıtlamaz. Canlı siteye dağıtım, RLS etkinleştirme ve hesap ayarları yapılmadı. Mutlak güvenlik veya DDoS dayanıklılığı garantisi verilmez.
+
+Kaynaklar:
+- https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+- https://docs.github.com/en/actions/reference/security/secure-use
+- https://supabase.com/docs/guides/database/secure-data
+- https://github.com/remarkjs/react-markdown#security
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors

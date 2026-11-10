@@ -1,7 +1,10 @@
-import React, { useMemo, useEffect, useState } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { LANGUAGES, indexPosts, filterAndSort, formatDate, previewText, validatePosts, type Post, type SortOrder } from "./archive";
+import React, { useMemo, useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { createClient } from "@supabase/supabase-js";
-import { ChevronLeft, Paperclip, ShieldCheck, Database } from "lucide-react";
+import { ChevronLeft, ChevronRight, Paperclip, ShieldCheck, Database, Search, ArrowUpRight, X } from "lucide-react";
 
 /**
  * =========================
@@ -19,21 +22,7 @@ const TABLE = "factshield";
  * TYPES & HELPERS
  * =========================
  */
-interface Post {
-  id: number;
-  title: string;
-  author: string;
-  content: string;
-  date: string; 
-  files: string[];
-}
 
-function toDateYMD(value: string | null): string {
-  if (!value) return "";
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toISOString().slice(0, 10);
-}
 
 function excerpt(text: string, max = 420) {
   const s = (text ?? "").trim();
@@ -70,168 +59,137 @@ function useSEO(title: string, description: string) {
   }, [title, description]);
 }
 
+const PAGE_SIZE = 12;
 const App = () => {
-  // ✅ Sadece Kamu Görünümü View'ları Kaldı
-  const [view, setView] = useState<"home" | "post">("home");
-  const [activePostId, setActivePostId] = useState<number | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
-  const [loadingPosts, setLoadingPosts] = useState(true);
+  const [attempt, setAttempt] = useState(0);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [query, setQuery] = useState("");
+  const [language, setLanguage] = useState("all");
+  const [sort, setSort] = useState<SortOrder>("newest");
+  const [page, setPage] = useState(1);
+  const detailHeading = useRef<HTMLHeadingElement>(null);
+  const resultHeading = useRef<HTMLHeadingElement>(null);
+  const lastOpened = useRef<number | null>(null);
+  const listScroll = useRef(0);
 
-  const activePost = useMemo(
-    () => posts.find((p) => p.id === activePostId) ?? null,
-    [posts, activePostId]
-  );
+  useEffect(() => {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true); setLoadError(false);
+      try {
+        const records: unknown[] = [];
+        // Supabase applies a row limit. Fetch pages so the archive is not silently truncated.
+        for (let offset = 0; ; offset += 500) {
+          const { data, error } = await supabase.from(TABLE)
+            .select("id,title,author,content,date,files")
+            .order("id", { ascending: false }).range(offset, offset + 499)
+            .abortSignal(controller.signal);
+          if (error || !data) throw error ?? new Error("Archive unavailable");
+          records.push(...data);
+          if (data.length < 500) break;
+        }
+        const validated = validatePosts(records);
+        if (!cancelled) setPosts(validated);
+      } catch { if (!cancelled) setLoadError(true); }
+      finally { window.clearTimeout(timeout); if (!cancelled) setLoading(false); }
+    };
+    void load();
+    return () => { cancelled = true; window.clearTimeout(timeout); controller.abort(); };
+  }, [attempt]);
 
-  const loadPosts = async () => {
-    setLoadingPosts(true);
-    setLoadError(false);
-    try {
-      const { data, error } = await supabase
-        .from(TABLE)
-        .select("id,title,author,content,date,files")
-        .order("id", { ascending: false });
+  const indexed = useMemo(() => indexPosts(posts), [posts]);
+  const results = useMemo(() => filterAndSort(indexed, query, language, sort), [indexed, query, language, sort]);
+  const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const visible = results.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const active = indexed.find(item => item.post.id === activeId);
+  const counts = useMemo(() => new Map(LANGUAGES.map(lang => [lang.code, indexed.filter(p => p.language === lang.code).length])), [indexed]);
+  const languageName = (code: string) => LANGUAGES.find(lang => lang.code === code)?.label ?? code;
 
-      if (error) throw error;
-      if (data) {
-        const mapped: Post[] = data.map((row: any) => ({
-          id: Number(row.id),
-          title: row.title,
-          author: row.author ?? "NorthByte Analyst",
-          content: row.content ?? "",
-          date: toDateYMD(row.date),
-          files: Array.isArray(row.files) ? row.files : [],
-        }));
-        setPosts(mapped);
-      }
-    } catch {
-      setLoadError(true);
-    } finally {
-      setLoadingPosts(false);
+  useEffect(() => {
+    if (activeId !== null) { window.scrollTo(0, 0); detailHeading.current?.focus({ preventScroll: true }); }
+    else if (lastOpened.current !== null) {
+      document.getElementById(`open-${lastOpened.current}`)?.focus({ preventScroll: true });
+      window.scrollTo(0, listScroll.current);
     }
-  };
+  }, [activeId]);
 
-  useEffect(() => { loadPosts(); }, []);
+  const openPost = (id: number) => { listScroll.current = window.scrollY; lastOpened.current = id; setActiveId(id); };
+  const resetFilters = () => { setQuery(""); setLanguage("all"); setSort("newest"); setPage(1); };
+  const goPage = (next: number) => { setPage(next); resultHeading.current?.scrollIntoView({ block: "start" }); resultHeading.current?.focus({ preventScroll: true }); };
+  useSEO(active ? `${active.post.title} | Nordic FactShield` : "Nordic FactShield | Uavhengig OSINT-arkiv – Norge, Sverige, Danmark, Europa",
+    active ? excerpt(active.post.content, 160) : "Uavhengig OSINT og digital etterforskning basert på verifiserbare data og offentlige dokumenter, inkludert DOJ-kilder. For Norge, Sverige, Danmark, Europa og Tyrkia.");
 
-  useSEO(
-    view === "post" && activePost
-      ? `${activePost.title} | Nordic FactShield`
-      : "Nordic FactShield | Uavhengig OSINT-arkiv – Norge, Sverige, Danmark, Europa",
-    view === "post" && activePost
-      ? excerpt(`Kilde: Offentlige/DOJ-dokumenter. ${activePost.content}`, 160)
-      : "Uavhengig OSINT og digital etterforskning basert på verifiserbare data og offentlige dokumenter, inkludert DOJ-kilder. For Norge, Sverige, Danmark, Europa og Tyrkia."
-  );
-
-  /**
-   * =========================
-   * RENDER HOME (Liste)
-   * =========================
-   */
-  const renderHome = () => (
-    <div className="space-y-6">
-      <div className="flex items-center gap-2 mb-4 border-b border-[#333] pb-2">
-        <Database size={18} className="text-osint-green" />
-        <h2 className="text-lg font-mono text-white uppercase tracking-widest">Global Intelligence Archive</h2>
-      </div>
-      {loadError ? (<div role="alert" className="p-8 border border-osint-border rounded-lg"><p>Unable to load the archive. Please try again.</p><button className="text-osint-green mt-4" onClick={loadPosts}>RETRY</button></div>) : loadingPosts ? (
-        <div className="p-8 text-center text-osint-muted font-mono animate-pulse">Synchronizing records...</div>
-      ) : posts.length === 0 ? (
-        <div className="p-8 text-center text-osint-muted font-mono">Archive is currently empty.</div>
-      ) : (
-        posts.map((post) => (
-          <article key={post.id} className="bg-osint-card border border-[#333] rounded-lg p-6 shadow-lg hover:border-osint-green transition-all">
-            <h2 tabIndex={0} role="button" onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActivePostId(post.id); setView("post"); } }} className="text-2xl font-mono text-white mb-2 cursor-pointer hover:text-osint-green"
-              onClick={() => { setActivePostId(post.id); setView("post"); }}>
-              {post.title}
-            </h2>
-            <div className="text-xs text-osint-muted mb-4 font-mono uppercase">
-              <span className="mr-4">Date: {post.date}</span>
-              <span>Analyst: {post.author}</span>
-            </div>
-            <p className="text-osint-text mb-6 font-sans whitespace-pre-wrap">{excerpt(post.content, 420)}</p>
-            <button onClick={() => { setActivePostId(post.id); setView("post"); }}
-              className="inline-flex items-center text-osint-green border border-osint-green px-4 py-2 rounded hover:bg-osint-green hover:text-black font-mono font-bold transition-all text-xs">
-              ACCESS FULL DATA
-            </button>
-          </article>
-        ))
-      )}
-    </div>
-  );
-
-  /**
-   * =========================
-   * RENDER POST DETAIL (Detay)
-   * =========================
-   */
-  const renderPostDetail = () => {
-    if (!activePost) return null;
-    return (
-      <div className="bg-osint-card border border-[#333] rounded-lg p-8 shadow-xl animate-fade-in">
-        <button onClick={() => setView("home")} className="mb-6 flex items-center text-osint-green hover:underline font-mono text-xs">
-          <ChevronLeft size={14} className="mr-1" /> RETURN TO INDEX
+  return <div className="app-shell">
+    <a className="skip-link" href="#main-content">Skip to content</a>
+    <header className="site-header">
+      <div className="site-width masthead">
+        <button className="brand" onClick={() => setActiveId(null)} aria-label="Nordic FactShield home">
+          <span className="brand-symbol"><ShieldCheck size={25} aria-hidden="true" /></span>
+          <span>NordicFact<span className="brand-accent">Shield</span><small>NORWAY · INDEPENDENT OSINT</small></span>
         </button>
-        <h1 className="text-3xl font-mono text-white mb-2 border-b border-osint-green pb-4 tracking-tighter uppercase">{activePost.title}</h1>
-        <div className="text-[10px] text-osint-muted mb-8 font-mono uppercase tracking-widest flex gap-4">
-          <span>Record: #{activePost.id}</span>
-          <span>Date: {activePost.date}</span>
-          <span>Analyst: {activePost.author}</span>
-        </div>
-        <div className="prose prose-invert max-w-none font-sans whitespace-pre-wrap text-lg leading-relaxed text-[#ccc] mb-8">{activePost.content}</div>
-        {activePost.files.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-[#333]">
-            <h3 className="text-white font-mono text-sm mb-4 uppercase tracking-widest text-osint-green">Evidence Files</h3>
-            <ul className="space-y-2">
-              {activePost.files.map((file, idx) => (
-                <li key={idx} className="flex items-center text-osint-green font-mono text-xs opacity-80"><Paperclip size={14} className="mr-2" /> {file}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <nav aria-label="Main navigation" className="site-nav">
+          <button aria-current={!active ? "page" : undefined} onClick={() => setActiveId(null)}>Archive</button>
+          <a href="./uskyld-analyse.html">Uskyld Analyse <ArrowUpRight size={14} aria-hidden="true" /></a>
+        </nav>
       </div>
-    );
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0a] font-sans selection:bg-osint-green selection:text-black">
-      <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className="border-b border-[#333] py-10 text-center bg-[#111]">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-mono text-white mb-2 tracking-tighter cursor-pointer" onClick={() => setView("home")}>
-            NordicFact<span className="text-osint-green">Shield.Norway</span>.no
-          </h1>
-          <p className="text-osint-muted text-lg font-light">Nordic FactShield is an independent, non-partisan OSINT and digital investigation initiative.
+      <div className="site-width header-intro">
+        <span className="eyebrow">OPEN SOURCES. TRANSPARENT METHODS.</span>
+        <h1>Global Intelligence Archive<span className="heading-dot">.</span></h1>
+        <details className="about-archive"><summary>About Nordic FactShield</summary><p>Nordic FactShield is an independent, non-partisan OSINT and digital investigation initiative.
 
 We are not affiliated with any government, intelligence agency, political organization, or media institution.
 
 Our work is based on open-source intelligence, data analysis, and transparent methodologies.We analyze high-profile cases, including the Epstein network, using verifiable data and open-source intelligence. 
 
-Being mentioned in investigative documents does not equate to criminal involvement. Our work focuses on separating verified facts from speculation, misinformation, and narrative distortion.</p>
-          
-          <nav className="mt-8 flex justify-center space-x-8 text-xs font-mono tracking-[0.2em]">
-            <button onClick={() => setView("home")} className={`pb-1 transition-all ${view === "home" ? "text-white border-b border-white" : "text-osint-muted hover:text-white"}`}>
-              HOME
-            </button>
+Being mentioned in investigative documents does not equate to criminal involvement. Our work focuses on separating verified facts from speculation, misinformation, and narrative distortion.</p></details>
+      </div>
+    </header>
 
-            {/* ✅ YENI: Integrity Arşivine Geçiş Linki */}
-            <a href="./uskyld-analyse.html" className="text-[#d4af37] hover:text-white transition-all pb-1 border-b border-transparent hover:border-white">
-              USKYLD ANALYSE
-            </a>
-          </nav>
+    <main id="main-content" className="site-width archive-main">
+      {active ? <section className="record-detail" aria-labelledby="record-title" lang={active.language === "unknown" ? undefined : active.language}>
+        <button className="back-button" onClick={() => setActiveId(null)}><ChevronLeft size={17} aria-hidden="true" /> Back to archive</button>
+        <div className="detail-sheet">
+          <div className="record-topline"><span className="record-id">RECORD #{active.post.id}</span><span className="language-badge" title="Language estimated from the text">{languageName(active.language)}</span></div>
+          <h2 id="record-title" className="record-title" ref={detailHeading} tabIndex={-1}>{active.post.title}</h2>
+          <dl className="record-meta"><div><dt>Date</dt><dd>{formatDate(active.post.date)}</dd></div><div><dt>Author</dt><dd>{active.post.author}</dd></div></dl>
+          <div className="report-content"><Markdown remarkPlugins={[remarkGfm]} components={{
+            a: ({ children, href }) => href ? <a href={href} target="_blank" rel="noopener noreferrer">{children}</a> : <span>{children}</span>,
+            img: ({ alt, src }) => <span className="image-reference">{alt || "Image"}{src ? <> — <a href={src} target="_blank" rel="noopener noreferrer">View source</a></> : null}</span>,
+          }}>{active.post.content}</Markdown></div>
+          {active.post.files.length > 0 && <section className="evidence-files"><h3><Paperclip size={17} aria-hidden="true" /> Evidence files <span>{active.post.files.length}</span></h3><ul>{active.post.files.map((file, index) => <li key={index}>{file}</li>)}</ul></section>}
         </div>
-      </header>
-
-      <main id="main-content" className="flex-grow container max-w-4xl mx-auto px-6 py-12">
-        {view === "home" && renderHome()}
-        {view === "post" && renderPostDetail()}
-      </main>
-
-      <footer className="border-t border-[#333] py-10 text-center bg-[#0d0d0d]">
-        <ShieldCheck size={24} className="mx-auto text-osint-muted mb-4 opacity-30" />
-        <p className="text-osint-muted font-mono text-[10px] uppercase tracking-[0.3em]">&copy; 2026 FactShield.no | Sealed Intelligence</p>
-      </footer>
-    </div>
-  );
+      </section> : <>
+        <section className="archive-tools" aria-label="Search and filter archive">
+          <div className="tools-heading"><h2><Database size={18} aria-hidden="true" /> Browse the archive</h2><span>{loading ? "Loading records…" : loadError ? "Connection unavailable" : `${posts.length} records`}</span></div>
+          <div className="filter-grid">
+            <div className="search-field"><label htmlFor="archive-search">Search</label><div className="search-input"><Search size={18} aria-hidden="true" /><input id="archive-search" type="search" autoComplete="off" maxLength={300} placeholder="Title, text, analyst or record number…" value={query} onChange={e => { setQuery(e.target.value); setPage(1); }} /></div></div>
+            <div><label htmlFor="archive-language">Language</label><select id="archive-language" value={language} onChange={e => { setLanguage(e.target.value); setPage(1); }}><option value="all">All languages</option>{LANGUAGES.filter(lang => (counts.get(lang.code) ?? 0) > 0).map(lang => <option key={lang.code} value={lang.code}>{lang.label} ({counts.get(lang.code)})</option>)}</select></div>
+            <div><label htmlFor="archive-sort">Sort by</label><select id="archive-sort" value={sort} onChange={e => { setSort(e.target.value as SortOrder); setPage(1); }}><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="az">Alphabetical A–Z</option><option value="za">Alphabetical Z–A</option><option value="language">Language, then title</option></select></div>
+          </div>
+          <p className="filter-note">Search covers the full record text. Language labels are estimated automatically.</p>
+        </section>
+        <div className="results-bar"><h2 ref={resultHeading} tabIndex={-1} id="results-heading" aria-live="polite">{loading ? "Loading archive…" : loadError ? "Archive unavailable" : `${results.length} ${results.length === 1 ? "record" : "records"}${query || language !== "all" ? " found" : " in the archive"}`}</h2>{(query || language !== "all" || sort !== "newest") && <button className="reset-button" onClick={resetFilters}><X size={14} aria-hidden="true" /> Reset filters</button>}</div>
+        {loadError ? <div className="empty-state" role="alert"><h3>We couldn’t load the archive.</h3><p>Check your connection and try again.</p><button className="primary-button" onClick={() => setAttempt(value => value + 1)}>Try again</button></div>
+        : loading ? <div className="loading-grid" aria-label="Loading records" aria-busy="true">{[0,1,2,3].map(i => <div key={i} className="skeleton-card" />)}</div>
+        : !results.length ? <div className="empty-state"><Search size={28} aria-hidden="true" /><h3>{posts.length ? "No matching records" : "The archive is currently empty"}</h3><p>{posts.length ? "Try a different search or choose another language." : "Published records will appear here."}</p>{posts.length > 0 && <button className="primary-button" onClick={resetFilters}>Clear filters</button>}</div>
+        : <><div className="records-grid" aria-labelledby="results-heading">{visible.map(({ post, language: postLanguage }) => <article className="archive-card" key={post.id} lang={postLanguage === "unknown" ? undefined : postLanguage}>
+          <div className="record-topline"><span className="record-id">RECORD #{post.id}</span><span className="language-badge" title="Language estimated from the text">{languageName(postLanguage)}</span></div>
+          <h3><button id={`open-${post.id}`} className="card-title" onClick={() => openPost(post.id)} title={post.title}>{post.title}</button></h3>
+          <dl className="card-meta"><div><dt>Date</dt><dd>{formatDate(post.date)}</dd></div><div><dt>Author</dt><dd>{post.author}</dd></div></dl>
+          <p className="card-preview">{previewText(post.content)}</p>
+          <div className="card-bottom"><button className="read-record" aria-label={`Read record #${post.id}`} onClick={() => openPost(post.id)}>Read full analysis <ArrowUpRight size={17} aria-hidden="true" /></button><span>{post.files.length > 0 ? <><Paperclip size={13} aria-hidden="true" /> {post.files.length}</> : null}</span></div>
+        </article>)}</div>
+        <nav className="archive-pagination" aria-label="Archive pages"><button disabled={currentPage === 1} onClick={() => goPage(currentPage - 1)}><ChevronLeft size={17} aria-hidden="true" /> Previous</button><span>Page <strong>{currentPage}</strong> of {totalPages}<small>{(currentPage - 1) * PAGE_SIZE + 1}–{Math.min(currentPage * PAGE_SIZE, results.length)} of {results.length}</small></span><button disabled={currentPage === totalPages} onClick={() => goPage(currentPage + 1)}>Next <ChevronRight size={17} aria-hidden="true" /></button></nav></>}
+      </>}
+    </main>
+    <footer className="site-footer"><div className="site-width"><span><ShieldCheck size={17} aria-hidden="true" /> Nordic FactShield · Norway</span><span>© 2026 FactShield.no | Sealed Intelligence</span></div></footer>
+  </div>;
 };
 
 const root = createRoot(document.getElementById("root")!);

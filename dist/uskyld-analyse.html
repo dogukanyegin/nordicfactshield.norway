@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://onnsaeorzwzgusdamqdi.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://onnsaeorzwzgusdamqdi.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uskyld Analyse | Integrity Declaration – Nordic FactShield</title>
@@ -23,86 +23,7 @@
 
     
 
-    <style>
-        body { background-color:#0a0a0a; color:#e0e0e0; }
-
-        ::-webkit-scrollbar { width:8px; }
-        ::-webkit-scrollbar-track { background:#0a0a0a; }
-        ::-webkit-scrollbar-thumb { background:#333; border-radius:4px; }
-        ::-webkit-scrollbar-thumb:hover { background:#00BFA5; }
-
-        .fade-in { animation: fadeIn .8s ease-in; }
-        @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-
-        /* ── Report section ── */
-        .report-section { scroll-margin-top: 80px; }
-
-        .report-header {
-            background: linear-gradient(135deg, #111 0%, #0f1a18 100%);
-            border: 1px solid #1e3a35;
-            border-left: 4px solid #00BFA5;
-        }
-
-        .report-block {
-            background: #0e0e0e;
-            border: 1px solid #222;
-            transition: border-color .25s;
-        }
-        .report-block:hover { border-color: #333; }
-
-        .report-number {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 10px;
-            color: #00BFA5;
-            letter-spacing: .2em;
-        }
-
-        .stat-box {
-            background: #0a0a0a;
-            border: 1px solid #1e3a35;
-            border-radius: 6px;
-            padding: 12px 16px;
-        }
-        .stat-val { font-family:'Roboto Mono',monospace; color:#00BFA5; font-size:13px; font-weight:700; }
-        .stat-lbl { font-size:11px; color:#666; margin-top:2px; }
-
-        .toc-link {
-            font-family:'Roboto Mono',monospace;
-            font-size:11px;
-            color:#666;
-            letter-spacing:.1em;
-            text-decoration:none;
-            display:flex;
-            align-items:center;
-            gap:8px;
-            padding:6px 0;
-            border-bottom:1px solid #1a1a1a;
-            transition: color .2s;
-        }
-        .toc-link:hover { color:#00BFA5; }
-        .toc-link::before { content:'→'; color:#00BFA5; }
-
-        .report-divider {
-            border:none;
-            border-top:1px solid #1a1a1a;
-            margin: 24px 0;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg,#0d1f1c 0%,#0a0a0a 100%);
-            border: 1px solid #1e3a35;
-            border-radius:6px;
-            padding:16px 20px;
-        }
-
-        /* Accordion toggle */
-        .acc-toggle { cursor:pointer; user-select:none; }
-        .acc-body { overflow:hidden; transition: max-height .4s ease, opacity .3s ease; }
-        .acc-body.collapsed { max-height:0 !important; opacity:0; }
-        .acc-body.expanded  { opacity:1; }
-        .acc-icon { transition:transform .3s; }
-        .acc-icon.open { transform:rotate(90deg); }
-    </style>
+    <link rel="stylesheet" href="./analysis-layout.css">
 <link rel="stylesheet" href="./theme.css">
 </head>
 <body class="font-sans min-h-screen flex flex-col selection:bg-osint-green selection:text-black">
@@ -825,13 +746,7 @@
                 <button data-click="showLang('sv')" id="tab-sv" class="lang-tab px-3 py-1.5 rounded border transition-all">🇸🇪 SVENSKA</button>
             </div>
  
-            <style>
-                .lang-tab { background:#0e0e0e; border-color:#1a2a4a; color:#666; cursor:pointer; }
-                .lang-tab:hover { border-color:#3a6fd8; color:#aaa; }
-                .active-tab { border-color:#3a6fd8 !important; color:#3a6fd8 !important; background:#0a0f1a !important; }
-                .lang-panel { display:none; }
-                .lang-panel.active { display:block; }
-            </style>
+            <link rel="stylesheet" href="./analysis-layout.css">
  
             <!-- ── TÜRKÇE ── -->
             <div id="panel-tr" class="lang-panel active report-block rounded-lg p-6 mb-2">

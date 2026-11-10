@@ -1,11 +1,16 @@
 # Nordic FactShield — GitHub Pages
 
-İçerikleri ve analizleri korunmuş modern tema. React + Vite, statik GitHub Pages dağıtımı ve mevcut Supabase okuma bağlantısı.
+Mevcut Supabase bağlantısı korunmuş, aranabilir ve filtrelenebilir OSINT arşivi. İçerikler yeniden yazılmaz.
 
-Node.js 22+: `npm ci`, `npm run build`. Çıktı: `dist`.
+- Tam metin arama, Türkçe/Norveççe/İngilizce/Rusça dil filtresi.
+- Alfabetik A–Z/Z–A, tarih ve dil sıralaması; 12 kayıtlık sayfalar.
+- Masaüstü/mobil düzen ve okunabilir Markdown analiz görünümü.
+- Yerel tasarım dosyaları, CSP, asgari dağıtım yetkileri ve kilitli bağımlılıklar.
 
-Depoda Settings → Pages → Source: GitHub Actions seçin. `.github/workflows/deploy.yml` main dalına gönderimlerde veya elle çalıştırıldığında siteyi yayınlar. Proje dosyalarını depo köküne yerleştirin. Var olan özel alan adı ayarlarını koruyun.
+Node.js 22.18+: `npm ci`, `npm test`, `npm run build`. Çıktı: `dist`.
 
-Yerel geliştirme: `npm run styles`, `npm run dev`.
+Depoda Settings → Pages → Source: **GitHub Actions**. main gönderimi otomatik yayınlar. Dosyaları `.github` dâhil depo köküne koyun. Mevcut özel alan adı ayarlarını koruyun.
 
-Detaylar: [Kurulum ve koruma](KURULUM-VE-KORUMA.md). Bu uygulama Gemini API anahtarı gerektirmez.
+**Canlı veritabanı koruması ayrı uygulanır:** `security/public-readonly.sql` ve ardından `security/verify-readonly.sql`. Paketin hazırlanması canlı izinleri değiştirmez.
+
+[Ayrıntılı kurulum, korumalar ve sınırlar](KURULUM-VE-KORUMA.md)
