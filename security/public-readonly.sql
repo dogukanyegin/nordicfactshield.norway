@@ -1,3 +1,4 @@
+-- Applied and verified on FactShield on 2026-11-10.
 -- Owner-only setup for the existing public archive. Does not edit any records.
 -- Apply in Supabase SQL Editor. Roll back automatically on failed assertions.
 BEGIN;
@@ -13,6 +14,7 @@ BEGIN
   EXECUTE format('REVOKE ALL PRIVILEGES (%s) ON TABLE public.factshield FROM PUBLIC, anon, authenticated', columns_sql);
 END $columns$;
 GRANT SELECT (id, title, author, content, date, files) ON public.factshield TO anon, authenticated;
+DROP POLICY IF EXISTS "Anyone can read" ON public.factshield;
 DROP POLICY IF EXISTS factshield_public_read ON public.factshield;
 CREATE POLICY factshield_public_read ON public.factshield FOR SELECT TO anon, authenticated USING (true);
 -- Restrictive policies additionally prevent writes if a grant is accidentally restored later.
@@ -42,6 +44,14 @@ BEGIN
     END LOOP;
   END LOOP;
 END $verify$;
+DO $sequence$
+DECLARE sequence_name text;
+BEGIN
+  sequence_name := pg_get_serial_sequence('public.factshield', 'id');
+  IF sequence_name IS NOT NULL THEN
+    EXECUTE format('REVOKE ALL PRIVILEGES ON SEQUENCE %s FROM PUBLIC, anon, authenticated', sequence_name);
+  END IF;
+END $sequence$;
 COMMIT;
 -- service_role/owner access is deliberately unchanged: publish only through a trusted administrator.
 -- This is not a security-definer RPC/storage/other-tables audit. Run verify-readonly.sql too.

@@ -11,6 +11,6 @@ Node.js 22.18+: `npm ci`, `npm test`, `npm run build`. Çıktı: `dist`.
 
 Depoda Settings → Pages → Source: **GitHub Actions**. main gönderimi otomatik yayınlar. Dosyaları `.github` dâhil depo köküne koyun. Mevcut özel alan adı ayarlarını koruyun.
 
-**Canlı veritabanı koruması ayrı uygulanır:** `security/public-readonly.sql` ve ardından `security/verify-readonly.sql`. Paketin hazırlanması canlı izinleri değiştirmez.
+**Canlı veritabanı koruması uygulandı ve doğrulandı (10 Kasım 2026):** `anon` ve `authenticated` salt okunur. 468 kaydın içeriği değişmedi. Kanıt: `CANLI-KORUMA.json`. Auth sızdırılmış parola koruması uyarısı açık kalmıştır.
 
 [Ayrıntılı kurulum, korumalar ve sınırlar](KURULUM-VE-KORUMA.md)

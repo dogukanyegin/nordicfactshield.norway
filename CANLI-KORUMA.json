@@ -1,0 +1,114 @@
+{
+  "project": "FactShield",
+  "project_ref": "onnsaeorzwzgusdamqdi",
+  "verified_date": "2026-11-10",
+  "migration": {
+    "version": "20261110090211",
+    "name": "harden_factshield_public_readonly_access",
+    "applied": true
+  },
+  "before": {
+    "count": 468,
+    "fingerprint": "5b812143621e7735a25a79212e1eb6f2"
+  },
+  "after": {
+    "roles": [
+      {
+        "r": "anon",
+        "read_title": true,
+        "any_table_write": false,
+        "any_column_write": false,
+        "any_sequence_access": false
+      },
+      {
+        "r": "authenticated",
+        "read_title": true,
+        "any_table_write": false,
+        "any_column_write": false,
+        "any_sequence_access": false
+      }
+    ],
+    "records": {
+      "count": 468,
+      "fingerprint": "5b812143621e7735a25a79212e1eb6f2"
+    },
+    "policies": [
+      {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "permissive": "PERMISSIVE",
+        "policyname": "factshield_public_read",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "permissive": "RESTRICTIVE",
+        "policyname": "factshield_no_browser_insert",
+        "with_check": "false"
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "false",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "permissive": "RESTRICTIVE",
+        "policyname": "factshield_no_browser_update",
+        "with_check": "false"
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "false",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "permissive": "RESTRICTIVE",
+        "policyname": "factshield_no_browser_delete",
+        "with_check": null
+      }
+    ],
+    "rls_enabled": true,
+    "public_definer_functions": 0
+  },
+  "role_tests": [
+    {
+      "both_roles_read_all_468": true,
+      "insert_update_delete_denied": true,
+      "test_transaction_rolled_back": true
+    }
+  ],
+  "public_api_read_after": {
+    "status": 200,
+    "rows": 1
+  },
+  "edge_functions": 0,
+  "storage": {
+    "public_bucket": "FactShield",
+    "public_write_policies": 0,
+    "public_downloads_preserved": true
+  },
+  "remaining_advisories": [
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "enabled": false,
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "limitations": [
+    "Auth password protection setting not changed: connector does not expose configuration update",
+    "GitHub Pages source release not deployed by this operation",
+    "Account/DNS settings and DDoS capacity not changed or proven"
+  ]
+}

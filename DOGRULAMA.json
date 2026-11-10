@@ -32,7 +32,7 @@
   "typescript_build": "passed",
   "unit_tests": "4 passed",
   "dependency_audit": "0 known vulnerabilities at verification",
-  "sql_syntax": "passed (not executed on live database)",
+  "sql_syntax": "passed and protection migration applied on live FactShield",
   "supabase_live_read": {
     "status": 200,
     "returned_rows": 1,
@@ -40,5 +40,7 @@
     "write_permissions_tested": false
   },
   "live_deployment_performed": false,
-  "live_rls_applied": false
+  "live_rls_applied": true,
+  "live_verification_receipt": "CANLI-KORUMA.json",
+  "live_role_tests": "anon/authenticated read all 468; INSERT/UPDATE/DELETE denied; no content changes"
 }
